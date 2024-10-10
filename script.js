@@ -1,10 +1,10 @@
-const createCard = (frontUrl, id, atk, def, backUrl='imgs/Down.jpg') => `
+const createCard = (frontUrl, atk, def, backUrl='imgs/Down.jpg') => `
     <div class="flip-card">
         <div class="flip-card-front">
             <img src="${backUrl}" class="face-card-img" alt="face up card">
         </div>
         <div class="flip-card-back">
-            <img id="${id}" src="${frontUrl}" class="face-card-img" alt="face up card" data-atk="${atk}" data-def="${def}">
+            <img src="${frontUrl}" class="face-card-img" alt="face up card" data-atk="${atk}" data-def="${def}">
         </div>
     </div>
 `
@@ -12,7 +12,7 @@ const createCard = (frontUrl, id, atk, def, backUrl='imgs/Down.jpg') => `
 // Função que renderiza as cartas num container
 const renderCards = (cards, containerId) => {
     const container = document.getElementById(containerId)
-    container.innerHTML = cards.map(card => createCard(card.url, card.id, card.atk, card.def)).join('')
+    container.innerHTML = cards.map(card => createCard(card.url, card.atk, card.def)).join('')
 }
 
 // Armazenando as URL's das cartas
