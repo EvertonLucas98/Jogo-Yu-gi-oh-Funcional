@@ -1,10 +1,10 @@
 const createCard = (frontUrl, atk, def, backUrl='imgs/Down.jpg') => `
     <div class="flip-card">
         <div class="flip-card-front">
-            <img src="${backUrl}" class="face-card-img" alt="face up card">
+            <img src="${backUrl}" class="face-card-img" alt="face-down">
         </div>
         <div class="flip-card-back">
-            <img src="${frontUrl}" class="face-card-img" alt="face up card" data-atk="${atk}" data-def="${def}">
+            <img src="${frontUrl}" class="face-card-img" alt="face-up" data-atk="${atk}" data-def="${def}">
         </div>
     </div>
 `
@@ -41,20 +41,21 @@ const infoValues = (event) => {
     const img = event.target
     const atk = img.getAttribute('data-atk')
     const def = img.getAttribute('data-def')
+    const alt = img.getAttribute('alt')
     console.log(`Ataque: ${atk} e Defesa: ${def}`)
 
     // Adiciona a carta à área de duelo
-    addToDuelArea(img.src)
+    addToDuelArea(img.src, alt)
 }
 
 // Função que adiciona a carta à área de duelo
-const addToDuelArea = (cardSrc) => {
+const addToDuelArea = (cardSrc, alt) => {
     const duelArea = document.querySelector('.duel')
     const amountCards = duelArea.querySelectorAll('img')
 
     // Verifica quantas cartas já estão na área de duelo
-    if (amountCards.length < 2) {
-        // Se houver menos de 2 cartas, adiciona a nova carta
+    if (amountCards.length < 1 && alt=='face-up') {
+        // Se houver menos de 1 carta, adiciona a nova carta
         const cardElement = document.createElement('img')
         cardElement.src = cardSrc
         cardElement.alt = "Carta em duelo"
@@ -62,9 +63,56 @@ const addToDuelArea = (cardSrc) => {
         cardElement.style.height = '350px'
 
         duelArea.appendChild(cardElement)
+        // Desabilita o deck superior
+        disableTopDeck('top-deck')
+        // Habilita o deck inferior
+        enableBottomDeck()
+    } else if (amountCards.length < 2 && alt=='face-up') {
+        // Se houver menos de 2 cartas, adiciona a nova carta
+        const cardElement = document.createElement('img')
+        cardElement.src = cardSrc
+        cardElement.alt = "Carta em duelo"
+        cardElement.style.width = '250px'
+        cardElement.style.height = '350px'
+        // Adiciona a carda à área de duelo
+        duelArea.appendChild(cardElement)
+        // Desabilita o deck superior
+        disableTopDeck('top-deck')
+        // Habilita o deck inferior
+        disableBottomDeck('bottom-deck')
     }
 }
 
-// Evento de click na carta
+// Função para habilita o deck inferior
+const enableBottomDeck = () => {
+    document.getElementById('bottom-deck').addEventListener('click', infoValues)
+    document.getElementById('bottom-deck').addEventListener('click', handleFlipClick)
+}
+
+// Função que desabilita o deck superior
+const disableTopDeck = (containerId) => {
+    const container = document.getElementById(containerId)
+    container.style.pointerEvents = 'none'
+}
+
+// Função que desabilita o deck inferior
+const disableBottomDeck = (containerId) => {
+    const container = document.getElementById(containerId)
+    container.style.pointerEvents = 'none'
+}
+
+
+// Função que aplica ou remove a classe 'flipped'
+const toggleFlip = (card) => card.style.transform = card.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)'
+
+// Implementa o click para uma carta específica
+const handleFlipClick = (event) => {
+    const card = event.target.closest('.flip-card')
+    if (card) toggleFlip(card) // Realiza o flip da carta
+}
+
+// Evento de click na carta do deck superior
 document.getElementById('top-deck').addEventListener('click', infoValues)
-document.getElementById('bottom-deck').addEventListener('click', infoValues)
+
+// Adicionando o evento de click ao container que contém as cartas
+document.getElementById('top-deck').addEventListener('click', handleFlipClick)
