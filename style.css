@@ -109,7 +109,7 @@
 }
 
 /* Botão */
-#button {
+#duel-button {
     position: absolute;
     right: 20px;
     padding: 10px 20px;
@@ -120,28 +120,41 @@
     cursor: pointer;
 }
 
-#button:hover {
+#duel-button:hover {
     background-color: #c00;
 }
 
 /* Barra de Vida */
 .player1-side {
-    width: 100vw;
+    width: 30vw;
     height: 50vh;
     border-radius: 10px;
-    margin: 10px 0;
+    padding: 50px 50px 50px 50px;
 }
 
 .player2-side {
-    width: 100vw;
+    width: 30vw;
     height: 50vh;
     border-radius: 10px;
-    margin: 10px 0;
+    padding: 50px 50px 50px 50px;
 }
 
 .health {
     width: 100%;
     height: 30px;
-    background-color: green;
-    border-radius: 5px;
+    background-color: #a8a8a8e3;
+    border-radius: 10px;
+}
+
+#player1-health {
+    width: 100%;
+    height: 100%;
+    background-color: mediumseagreen;
+    border-radius: 10px;
+}
+#player2-health {
+    width: 100%;
+    height: 100%;
+    background-color: mediumseagreen;
+    border-radius: 10px;
 }
