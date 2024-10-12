@@ -24,8 +24,6 @@ const topDeckCards = [
     {url: "imgs/DarkMagician.jpg", atk: 2500, def: 2100}
 ]
 
-const duelCards = []
-
 const bottomDeckCards = [
     {url: "imgs/Kuriboh.jpg", atk: 300, def: 200},
     {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400},
@@ -39,13 +37,34 @@ renderCards(topDeckCards, "top-deck")
 renderCards(bottomDeckCards, "bottom-deck")
 
 // Função que mostra na tela o valor do ataque e da defesa das respectivas cartas
-const showValues = (event) => {
+const infoValues = (event) => {
     const img = event.target
     const atk = img.getAttribute('data-atk')
     const def = img.getAttribute('data-def')
-    alert(`Ataque: ${atk} e Defesa: ${def}`)
+    console.log(`Ataque: ${atk} e Defesa: ${def}`)
+
+    // Adiciona a carta à área de duelo
+    addToDuelArea(img.src)
+}
+
+// Função que adiciona a carta à área de duelo
+const addToDuelArea = (cardSrc) => {
+    const duelArea = document.querySelector('.duel')
+    const amountCards = duelArea.querySelectorAll('img')
+
+    // Verifica quantas cartas já estão na área de duelo
+    if (amountCards.length < 2) {
+        // Se houver menos de 2 cartas, adiciona a nova carta
+        const cardElement = document.createElement('img')
+        cardElement.src = cardSrc
+        cardElement.alt = "Carta em duelo"
+        cardElement.style.width = '250px'
+        cardElement.style.height = '350px'
+
+        duelArea.appendChild(cardElement)
+    }
 }
 
 // Evento de click na carta
-document.getElementById('top-deck').addEventListener('click', showValues)
-document.getElementById('bottom-deck').addEventListener('click', showValues)
+document.getElementById('top-deck').addEventListener('click', infoValues)
+document.getElementById('bottom-deck').addEventListener('click', infoValues)

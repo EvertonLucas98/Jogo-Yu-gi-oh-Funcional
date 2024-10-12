@@ -1,0 +1,15 @@
+Passos:
+	Adicionar favcon
+	Mudar ícone do cursor uma pirâmide do yu-gi-oh! 
+	Associar atributos às imagens	(FEITO!)
+	Ao passar o mause a carta fica maior
+	Mudar de passar o mouse para clicar para flipar a carta
+	Criar os turnos de jogadas
+	Fazer a carda selecionada para o duelo sumir
+	Lógica para tomar dano através da subtração de ataque por defesa	
+	Lógica para derrota
+	Lógica para reiniciar
+
+
+Bugs:
+	Flip da carta que não flipa

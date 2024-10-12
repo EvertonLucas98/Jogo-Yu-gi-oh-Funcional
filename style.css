@@ -10,6 +10,9 @@
 }
 
 .left {
+    background-color: tomato;
+    display: flex;
+    flex-direction: column;
     width: 30vw;
     height: 100vh;
     background-image: url(/imgs/parchment.jpg);
@@ -75,7 +78,7 @@
     position: relative;
     width: 150px;
     height: 220px;
-    transition: 0.5s;
+    transition: 0.8s;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
@@ -98,4 +101,42 @@
 .flip-card-img {
     width: 100%;
     height: 100%;
+}
+
+/* Botão */
+#button {
+    position: absolute;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#button:hover {
+    background-color: #c00;
+}
+
+/* Barra de Vida */
+.player1-side {
+    width: 100vw;
+    height: 50vh;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.player2-side {
+    width: 100vw;
+    height: 50vh;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+
+.health {
+    width: 100%;
+    height: 30px;
+    background-color: green;
+    border-radius: 5px;
 }
