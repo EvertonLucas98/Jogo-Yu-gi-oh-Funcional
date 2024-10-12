@@ -132,7 +132,7 @@ const handleFlipClick = (event) => {
     if (card) toggleFlip(card) // Realiza o flip da carta
 }
 
-// Função para o evento de click no botão
+// Função para o evento de click no botão de atacar do player 1
 const duelButtonEvent = () => {
     const card1 = document.getElementById('card1')
     const card2 = document.getElementById('card2')
@@ -140,7 +140,7 @@ const duelButtonEvent = () => {
     const defCard2 = card2.getAttribute('data-def')
     duelDamage(atkCard1, defCard2)
     cleanDuelArea()
-    restartRound()
+    otherRound('bottom-deck')
 }
 
 // Função que calcula o dano
@@ -161,10 +161,62 @@ const cleanDuelArea = () => {
     document.getElementById('card2').remove()
 }
 
+// Função para pegar o atributo alt da imagem
+const otherInfoValues = (event) => {
+    const img = event.target
+    const alt = img.getAttribute('alt')
+    // Adiciona a carta à área de duelo
+    otherAddToDuelArea(alt)
+}
+
+// Função que adiciona a carta à área de duelo
+const otherAddToDuelArea = (alt) => {
+    const duelArea = document.querySelector('.duel')
+    const amountCards = duelArea.querySelectorAll('img')
+
+    // Verifica quantas cartas já estão na área de duelo
+    if (amountCards.length <= 1 && alt=='face-up') {
+        // Desabilita o deck inferior
+        disableBottomDeck('bottom-deck')
+        // Habilita o deck superior
+        enableTopDeck('top-deck')
+    } else if (amountCards.length < 2 && alt=='face-up') {
+        // Desabilita o deck superior
+        disableTopDeck('top-deck')
+        // Habilita o deck inferior
+        disableBottomDeck('bottom-deck')
+    }
+}
+
+// Função para o evento de click no botão de atacar do player 2
+const otherDuelButtonEvent = () => {
+    const card1 = document.getElementById('card1')
+    const card2 = document.getElementById('card2')
+    const atkCard1 = card1.getAttribute('data-atk')
+    const defCard2 = card2.getAttribute('data-def')
+    duelDamage(atkCard1, defCard2)
+    cleanDuelArea()
+    anotherRound('top-deck')
+}
+
+// Função para fazer o deck inferior começar jogando
+const otherRound = (containerId) => {
+    enableBottomDeck(containerId)
+    document.getElementById(containerId).addEventListener('click', otherInfoValues)
+    document.getElementById(containerId).addEventListener('click', handleFlipClick)
+}
+
+// Função para fazer o deck superior começar jogando
+const anotherRound = (containerId) => {
+    enableTopDeck(containerId)
+    document.getElementById(containerId).addEventListener('click', infoValues)
+    document.getElementById(containerId).addEventListener('click', handleFlipClick)
+}
+
+// Adicionando o evento de click ao container que contém o deck superior
 document.getElementById('top-deck').addEventListener('click', infoValues)
+document.getElementById('top-deck').addEventListener('click', handleFlipClick)
 
 // Evento de click no botão
-document.getElementById('duel-button').addEventListener('click', duelButtonEvent)
-
-// Adicionando o evento de click ao container que contém as cartas
-document.getElementById('top-deck').addEventListener('click', handleFlipClick)
+document.getElementById('player1-duel-button').addEventListener('click', otherDuelButtonEvent)
+document.getElementById('player2-duel-button').addEventListener('click', duelButtonEvent)

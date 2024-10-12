@@ -109,19 +109,28 @@
 }
 
 /* Botão */
-#duel-button {
+.duel-button {
+    font-size: large;
+    font-weight: bolder;
     position: absolute;
-    right: 20px;
     padding: 10px 20px;
     background-color: #f00;
     color: #fff;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
-#duel-button:hover {
+.duel-button:hover {
     background-color: #c00;
+}
+
+#player1-duel-button {
+    right: 40px;
+}
+
+#player2-duel-button {
+    left: 620px;
 }
 
 /* Barra de Vida */

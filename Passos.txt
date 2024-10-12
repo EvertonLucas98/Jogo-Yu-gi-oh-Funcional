@@ -2,15 +2,11 @@ Passos:
 	Adicionar favcon
 	Mudar ícone do cursor uma pirâmide do yu-gi-oh! 
 	Ao passar o mause a carta fica maior quando estiver voltada para cima
-	Mudar de passar o mouse para clicar para flipar a carta	(FEITO!)
-	Criar os turnos de jogadas		(FEITO!)
-	Fazer a carda selecionada para o duelo sumir	(FEITO!)
-	Lógica para quando apertar o botão a lógica do dano seja acionada	(FEITO!)
 	Lógica para tomar dano através da subtração de ataque por defesa		(+/-)
-	Lógica para os rounds seguintes
-	Lógica para derrota
+	Lógica para os rounds seguintes		(FEITO!)
+	Lógica para vitória/derrota
 	Lógica para reiniciar
 
 
 Bugs:
-	Flip da carta que não flipa	(RESOLVIDO!🙏)
+	Botão atacar
