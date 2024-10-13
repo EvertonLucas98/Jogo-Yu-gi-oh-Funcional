@@ -2,11 +2,10 @@ Passos:
 	Adicionar favcon
 	Mudar ícone do cursor uma pirâmide do yu-gi-oh! 
 	Ao passar o mause a carta fica maior quando estiver voltada para cima
-	Lógica para tomar dano através da subtração de ataque por defesa		(+/-)
-	Lógica para os rounds seguintes		(FEITO!)
-	Lógica para vitória/derrota
-	Lógica para reiniciar
+	Lógica para tomar dano através da subtração de ataque por defesa		(FEITO!)
+	Lógica para vitória/derrota	(FEITO!)
+	Lógica para reiniciar			(FEITO!)
 
 
 Bugs:
-	Botão atacar
+	Bug do botão de atacar! 😥
