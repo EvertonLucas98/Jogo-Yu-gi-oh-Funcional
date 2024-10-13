@@ -74,9 +74,9 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
 
         duelArea.appendChild(cardElement)
         // Desabilita o deck superior
-        disableTopDeck('top-deck')
+        disableDeck('top-deck')
         // Habilita o deck inferior
-        enableBottomDeck('bottom-deck')
+        enableDeck('bottom-deck')
     } else if (amountCards.length < 2 && alt=='face-up') {
         // Se houver menos de 2 cartas, adiciona a nova carta
         const cardElement = document.createElement('img')
@@ -93,36 +93,22 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         // Elimina a carta do jogo
         // (incompleto)
         // Desabilita o deck superior
-        disableTopDeck('top-deck')
+        disableDeck('top-deck')
         // Habilita o deck inferior
-        disableBottomDeck('bottom-deck')
+        disableDeck('bottom-deck')
     }
 }
 
-// Função para habilitar o deck superior
-const enableTopDeck = (containerId) => {
+// Função para habilitar o deck
+const enableDeck = (containerId) => {
     const container = document.getElementById(containerId)
     container.style.pointerEvents = 'auto'
     document.getElementById(containerId).addEventListener('click', infoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
 
-// Função para habilitar o deck inferior
-const enableBottomDeck = (containerId) => {
-    const container = document.getElementById(containerId)
-    container.style.pointerEvents = 'auto'
-    document.getElementById(containerId).addEventListener('click', infoValues)
-    document.getElementById(containerId).addEventListener('click', handleFlipClick)
-}
-
-// Função que desabilita o deck superior
-const disableTopDeck = (containerId) => {
-    const container = document.getElementById(containerId)
-    container.style.pointerEvents = 'none'
-}
-
-// Função que desabilita o deck inferior
-const disableBottomDeck = (containerId) => {
+// Função que desabilita o deck
+const disableDeck = (containerId) => {
     const container = document.getElementById(containerId)
     container.style.pointerEvents = 'none'
 }
@@ -145,6 +131,8 @@ const duelButtonEvent = () => {
     const deckCard1 = card1.getAttribute('data-deck')
     duelDamage(atkCard1, defCard2, deckCard1)
     cleanDuelArea()
+    disableDuelButtonEvent('player1-duel-button')
+    enableDuelButtonEvent('player2-duel-button')
     otherRound('bottom-deck')
 }
 
@@ -197,7 +185,7 @@ const cleanDuelArea = () => {
 
 // Função para fazer o deck inferior começar jogando (7º)
 const otherRound = (containerId) => {
-    enableBottomDeck(containerId)
+    enableDeck(containerId)
     document.getElementById(containerId).addEventListener('click', otherInfoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
@@ -218,14 +206,14 @@ const otherAddToDuelArea = (alt) => {
     // Verifica quantas cartas já estão na área de duelo
     if (amountCards.length <= 1 && alt=='face-up') {
         // Desabilita o deck inferior
-        disableBottomDeck('bottom-deck')
+        disableDeck('bottom-deck')
         // Habilita o deck superior
-        enableTopDeck('top-deck')
+        enableDeck('top-deck')
     } else if (amountCards.length < 2 && alt=='face-up') {
         // Desabilita o deck superior
-        disableTopDeck('top-deck')
+        disableDeck('top-deck')
         // Habilita o deck inferior
-        disableBottomDeck('bottom-deck')
+        disableDeck('bottom-deck')
     }
 }
 
@@ -237,15 +225,30 @@ const otherDuelButtonEvent = () => {
     const defCard2 = card2.getAttribute('data-def')
     duelDamage(atkCard1, defCard2)
     cleanDuelArea()
+    enableDuelButtonEvent('player1-duel-button')
+    disableDuelButtonEvent('player2-duel-button')
     anotherRound('top-deck')
 }
 
 
 // Função para fazer o deck superior começar jogando (11º)
 const anotherRound = (containerId) => {
-    enableTopDeck(containerId)
+    enableDeck(containerId)
     document.getElementById(containerId).addEventListener('click', infoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
+}
+
+// Função para habilitar os botões
+const enableDuelButtonEvent = (containerId) => {
+    const container = document.getElementById(containerId)
+    container.style.pointerEvents = 'auto'
+    document.getElementById('player2-duel-button').addEventListener('click', otherDuelButtonEvent)
+}
+
+// Função que desabilita o botão de ataque do player 1
+const disableDuelButtonEvent = (containerId) => {
+    const container = document.getElementById(containerId)
+    container.style.pointerEvents = 'none'
 }
 
 // Adicionando o evento de click ao container que contém o deck superior
@@ -253,5 +256,4 @@ document.getElementById('top-deck').addEventListener('click', infoValues)
 document.getElementById('top-deck').addEventListener('click', handleFlipClick)
 
 // Evento de click no botão
-document.getElementById('player1-duel-button').addEventListener('click', otherDuelButtonEvent)
-document.getElementById('player2-duel-button').addEventListener('click', duelButtonEvent)
+document.getElementById('player1-duel-button').addEventListener('click', duelButtonEvent)
