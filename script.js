@@ -22,19 +22,19 @@ const renderCards = (cards, containerId) => {
 
 // Armazenando as URL's das cartas
 const topDeckCards = [
-    {url: "imgs/BlueEyesWhiteDragon.jpg", atk: 3000, def: 2500, deck: 'top'},
+    {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400, deck: 'top'},
     {url: "imgs/DarkMagicianGirl.jpg", atk: 2000, def: 1700, deck: 'top'},
-    {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'top'},
-    {url: "imgs/ExodiaTheForbiddenOne.jpg", atk: 1000, def: 1000, deck: 'top'},
-    {url: "imgs/DarkMagician.jpg", atk: 2500, def: 2100, deck: 'top'}
+    {url: "imgs/SummonedSkull.jpg", atk: 2500, def: 1200, deck: 'top'},
+    {url: "imgs/Kuriboh.jpg", atk: 300, def: 200, deck: 'top'},
+    {url: "imgs/BlackLusterSoldier.jpg", atk: 3000, def: 2500, deck: 'top'}
 ]
 
 const bottomDeckCards = [
-    {url: "imgs/Kuriboh.jpg", atk: 300, def: 200, deck: 'bottom'},
-    {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400, deck: 'bottom'},
+    {url: "imgs/LusterDragon.jpg", atk: 2400, def: 1400, deck: 'bottom'},
+    {url: "imgs/BlueEyesWhiteDragon.jpg", atk: 3000, def: 2500, deck: 'bottom'},
     {url: "imgs/ObeliskTheTormentor.jpg", atk: 4000, def: 4000, deck: 'bottom'},
     {url: "imgs/RedEyesBlackDragon.jpg", atk: 2400, def: 2000, deck: 'bottom'},
-    {url: "imgs/SummonedSkull.jpg", atk: 2500, def: 1200, deck: 'bottom'}
+    {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom'}
 ]
 
 // Renderiza as cartas na tela
@@ -48,8 +48,6 @@ const infoValues = (event) => {
     const def = img.getAttribute('data-def')
     const alt = img.getAttribute('alt')
     const deck = img.getAttribute('data-deck')
-    console.log(`Ataque: ${atk} e Defesa: ${def} e deck: ${deck}`)
-
     // Adiciona a carta à área de duelo
     addToDuelArea(img.src, alt, atk, def, deck)
 }
@@ -113,7 +111,7 @@ const disableDeck = (containerId) => {
     container.style.pointerEvents = 'none'
 }
 
-// Função que aplica ou remove a classe 'flipped'
+// Função que realiza o flip da carta
 const toggleFlip = (card) => card.style.transform = card.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)'
 
 // Implementa o click para uma carta específica

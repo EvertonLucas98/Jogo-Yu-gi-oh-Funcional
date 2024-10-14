@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    cursor: url('imgs/Cursor.png') 16 16, auto;
+}
+
 .container {
     display: flex;
     height: 100vh;
@@ -19,6 +23,13 @@
     background-size: cover;
     background-position: center;
     border-radius: 10px;
+}
+
+.player-side {
+    width: 30vw;
+    height: 50vh;
+    border-radius: 10px;
+    padding: 20px 50px 0px 50px;
 }
 
 .right {
@@ -39,11 +50,6 @@
     justify-content: space-around;
 }
 
-.top-deck img {
-    width: 150px;
-    height: 220px;
-}
-
 .bottom-deck {
     /* background-color: mediumseagreen; */
     width: 70vw;
@@ -53,9 +59,10 @@
     justify-content: space-around;
 }
 
+.top-deck img,
 .bottom-deck img {
-    width: 150px;
-    height: 220px;
+    width: 170px;
+    height: 240px;
 }
 
 .duel {
@@ -72,8 +79,7 @@
     height: 350px;
 }
 
-/* HOVER */
-
+/* FLIP */
 .flip-card {
     position: relative;
     width: 150px;
@@ -90,7 +96,6 @@
     backface-visibility: hidden;
     width: 100%;
     height: 100%;
-    cursor: pointer;
 }
 
 .flip-card .flip-card-back {
@@ -118,7 +123,7 @@
     color: #fff;
     border: none;
     border-radius: 5px;
-    cursor: pointer; 
+    cursor: url('imgs/Cursor.png') 16 16, auto;
 }
 
 .duel-button:hover {
@@ -134,20 +139,6 @@
 }
 
 /* Barra de Vida */
-.player1-side {
-    width: 30vw;
-    height: 50vh;
-    border-radius: 10px;
-    padding: 50px 50px 50px 50px;
-}
-
-.player2-side {
-    width: 30vw;
-    height: 50vh;
-    border-radius: 10px;
-    padding: 50px 50px 50px 50px;
-}
-
 .health {
     width: 100%;
     height: 30px;
