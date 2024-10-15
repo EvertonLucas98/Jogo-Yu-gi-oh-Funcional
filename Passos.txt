@@ -1,7 +1,11 @@
 Passos:
-	Adicionar favcon
-	Mudar ícone do cursor uma pirâmide do yu-gi-oh! 
-	Ao passar o mause a carta fica maior quando estiver voltada para cima
+	Adicionar favcon		(FEITO!)
+	Mudar ícone do cursor uma pirâmide do yu-gi-oh!		(FEITO!)
+	Criar uma área de pré-visualização das cartas
+	Música de fundo
+	Gif atrás das cartas do jogo (talvez)
+	Página inicial
+	Página de introdução (talvez)
 
 Bugs:
-	Bug do botão de atacar! (RESOLVIDO! 😅)
+	Nenhum 
