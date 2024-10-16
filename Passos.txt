@@ -1,11 +1,13 @@
 Passos:
-	Adicionar favcon		(FEITO!)
-	Mudar ícone do cursor uma pirâmide do yu-gi-oh!		(FEITO!)
+	Página inicial do game			[FEITO!]
+		Da para jogar contra o computador? (TALVEZ)
+	Página do nome
+	Página de introdução (TALVEZ)		[FEITO!]
+	Música de fundo					[FEITO!]
+	Botão para mutar a musica (TALVEZ)
+	Colocar um vídeo ou de intro ou do grito "é hora do duelo"
 	Criar uma área de pré-visualização das cartas
-	Música de fundo
 	Gif atrás das cartas do jogo (talvez)
-	Página inicial
-	Página de introdução (talvez)
 
 Bugs:
 	Nenhum 

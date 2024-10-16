@@ -1,40 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yu-Gi-Oh!</title>
     <link rel="shortcut icon" href="imgs/Favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <div class="container">
-        <div class="left">
-            <div class="player-side">
-                <div class="health">
-                    <div id="player1-health">
-                        <p id="player1-Life-Amount">10000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="score"></div>
-            <div class="player-side">
-                <div class="health">
-                    <div id="player2-health">
-                        <p id="player2-Life-Amount">10000</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="right">
-            <div id="top-deck" class="top-deck"></div>
-            <div id="duel" class="duel">
-                <button id="player1-duel-button" class="duel-button">PLAYER01<br>ATACAR!</button>
-                <button id="player2-duel-button" class="duel-button">PLAYER02<br>ATACAR!</button>
-            </div>
-            <div id="bottom-deck" class="bottom-deck"></div>
-        </div>
+        <a href="introLocal.html" class="button">DUELO LOCAL</a>
+        <a href="introComputer.html" class="button">DUELO VS COMPUTADOR</a>
     </div>
-    <script src="script.js"></script>
+    <audio src="audios/intro.mp3" id="introMusic" loop="true"></audio>
+    
+    <script>
+        const backgroundMusic = () => {
+            const music = document.getElementById('introMusic')
+            music.play()
+        }
+        backgroundMusic()
+    </script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yu-Gi-Oh!</title>
+    <link rel="shortcut icon" href="imgs/Favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/intro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fondamento:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="instructions">
+            <p>
+                No DUELO VS O COMPUTADOR, você jogará com o deck superior e terá uma rodada para executar seu ataque, selecionando uma de suas cartas para o duelo, enquanto o computador realizará sua respectiva defesa, também escolhendo uma carta. Caso seu ataque seja maior que a defesa dele, você causará, como dano, o resultado da subtração do seu ataque pela defesa da carta dele. Em seguida, será a vez do computador atacar e você terá que se defender, seguindo a mesma lógica. Vence quem zerar a vida do oponente.
+            </p>
+        </div>
+        <div class="buttons">
+            <a href="index.html" class="button">Voltar</a>
+            <a href="" class="button">Continuar</a>
+        </div>
+    </div>
+    <audio src="audios/e-hora-do-duelo.mp3" id="scream"></audio>
+
+    <script>
+        const duelTimeMusic = () => {
+            const scream = document.getElementById('scream')
+            scream.play()
+        }
+        duelTimeMusic()
+    </script>
+</body>
+</html>

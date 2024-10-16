@@ -3,13 +3,13 @@ const player2LifeAmount = document.getElementById('player2-Life-Amount')
 const player1LifeBar = document.getElementById('player1-health')
 const player2LifeBar = document.getElementById('player2-health')
 
-const createCard = (frontUrl, atk, def, deck, backUrl='imgs/Down.jpg') => `
+const createCard = (frontUrl, atk, def, deck, position, backUrl='imgs/Down.jpg') => `
     <div class="flip-card">
         <div class="flip-card-front">
             <img src="${backUrl}" class="face-card-img" alt="face-down">
         </div>
         <div class="flip-card-back">
-            <img src="${frontUrl}" class="face-card-img" alt="face-up" data-atk="${atk}" data-def="${def}" data-deck="${deck}">
+            <img src="${frontUrl}" class="face-card-img" alt="face-up" data-atk="${atk}" data-def="${def}" data-deck="${deck}" position="${position}">
         </div>
     </div>
 `
@@ -22,19 +22,19 @@ const renderCards = (cards, containerId) => {
 
 // Armazenando as URL's das cartas
 const topDeckCards = [
-    {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400, deck: 'top'},
-    {url: "imgs/DarkMagicianGirl.jpg", atk: 2000, def: 1700, deck: 'top'},
-    {url: "imgs/SummonedSkull.jpg", atk: 2500, def: 1200, deck: 'top'},
-    {url: "imgs/Kuriboh.jpg", atk: 300, def: 200, deck: 'top'},
-    {url: "imgs/BlackLusterSoldier.jpg", atk: 3000, def: 2500, deck: 'top'}
+    {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400, deck: 'top', position: 1},
+    {url: "imgs/DarkMagicianGirl.jpg", atk: 2000, def: 1700, deck: 'top', position: 2},
+    {url: "imgs/SummonedSkull.jpg", atk: 2500, def: 1200, deck: 'top', position: 3},
+    {url: "imgs/Kuriboh.jpg", atk: 300, def: 200, deck: 'top', position: 4},
+    {url: "imgs/BlackLusterSoldier.jpg", atk: 3000, def: 2500, deck: 'top', position: 5}
 ]
 
 const bottomDeckCards = [
-    {url: "imgs/LusterDragon.jpg", atk: 2400, def: 1400, deck: 'bottom'},
-    {url: "imgs/BlueEyesWhiteDragon.jpg", atk: 3000, def: 2500, deck: 'bottom'},
-    {url: "imgs/ObeliskTheTormentor.jpg", atk: 4000, def: 4000, deck: 'bottom'},
-    {url: "imgs/RedEyesBlackDragon.jpg", atk: 2400, def: 2000, deck: 'bottom'},
-    {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom'}
+    {url: "imgs/LusterDragon.jpg", atk: 2400, def: 1400, deck: 'bottom', position: 6},
+    {url: "imgs/BlueEyesWhiteDragon.jpg", atk: 3000, def: 2500, deck: 'bottom', position: 7},
+    {url: "imgs/ObeliskTheTormentor.jpg", atk: 4000, def: 4000, deck: 'bottom', position: 8},
+    {url: "imgs/RedEyesBlackDragon.jpg", atk: 2400, def: 2000, deck: 'bottom', position: 9},
+    {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom', position: 10}
 ]
 
 // Renderiza as cartas na tela
@@ -105,7 +105,7 @@ const enableDeck = (containerId) => {
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
 
-// Função que desabilita o deck
+// Função para desabilitar o deck
 const disableDeck = (containerId) => {
     const container = document.getElementById(containerId)
     container.style.pointerEvents = 'none'
@@ -228,7 +228,6 @@ const otherDuelButtonEvent = () => {
     anotherRound('top-deck')
 }
 
-
 // Função para fazer o deck superior começar jogando (11º)
 const anotherRound = (containerId) => {
     enableDeck(containerId)
@@ -248,6 +247,14 @@ const disableDuelButtonEvent = (containerId) => {
     const container = document.getElementById(containerId)
     container.style.pointerEvents = 'none'
 }
+
+// Função que da play na musica do duelo
+const backgroundDuelMusic = () => {
+    const duelMusicLoop = document.getElementById('duel-music-loop')
+    duelMusicLoop.play()
+}
+
+backgroundDuelMusic()
 
 // Adicionando o evento de click ao container que contém o deck superior
 document.getElementById('top-deck').addEventListener('click', infoValues)
