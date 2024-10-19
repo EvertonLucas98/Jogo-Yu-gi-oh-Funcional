@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url(../imgs/pergaminho.png);  
+    background-image: url(../imgs/parchment.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -37,7 +37,7 @@ p {
     font-weight: 600;
     font-size: 1.8em;
     padding: 20px 60px;
-    background-image: linear-gradient(rgb(24, 29, 51), rgb(224, 29, 51));
+    background-image: linear-gradient(rgb(224, 29, 51), rgb(24, 29, 51));
     color: #fff;
     border: none;
     clip-path: polygon(20% 10%, 80% 10%, 100% 50%, 80% 90%, 20% 90%, 0% 50%);
@@ -51,6 +51,6 @@ p {
 }
 
 a:hover {
-    background-image: linear-gradient(rgb(224, 29, 51), rgb(24, 29, 51));
+    background-image: linear-gradient(rgb(24, 29, 51), rgb(224, 29, 51));
 
 }

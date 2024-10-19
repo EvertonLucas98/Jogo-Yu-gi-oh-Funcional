@@ -11,6 +11,7 @@ body {
 .container {
     display: flex;
     height: 100vh;
+    width: 100vw;
 }
 
 .left {
@@ -19,10 +20,9 @@ body {
     flex-direction: column;
     width: 30vw;
     height: 100vh;
-    background-image: url(../imgs/parchment.jpg);
+    background-image: url(../imgs/background-left.png);
     background-size: cover;
     background-position: center;
-    border-radius: 10px;
 }
 
 .player-side {
@@ -33,25 +33,19 @@ body {
 }
 
 .right {
+    background-image: url(../imgs/background-GIF.gif);
     width: 70vw;
     height: 100vh;
-    background-image: url(../imgs/decks.png);
     background-size: cover;
     background-position: center;
     border-radius: 10px;
 }
 
-.top-deck {
-    /* background-color: royalblue; */
-    width: 70vw;
-    height: 30vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
+.top-deck,
 .bottom-deck {
-    /* background-color: mediumseagreen; */
+    /* background-color: royalblue; */
+    background-image: url(../imgs/table.png);
+    background-size: cover;
     width: 70vw;
     height: 30vh;
     display: flex;
@@ -61,8 +55,9 @@ body {
 
 .top-deck img,
 .bottom-deck img {
-    width: 170px;
-    height: 240px;
+    width: 150px;
+    height: 220px;
+    margin-top: 2px;
 }
 
 .duel {
@@ -74,9 +69,26 @@ body {
     justify-content: space-around;
 }
 
+.duel-card-1,
+.duel-card-2 {
+    width: 250px;
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 8px solid whitesmoke;
+    border-radius: 10px;
+}
+
+
 .duel img {
     width: 250px;
     height: 350px;
+}
+
+#duel-icon {
+    width: 200px;
+    height: 200px;
 }
 
 /* FLIP */
@@ -113,11 +125,10 @@ body {
     height: 100%;
 }
 
-/* Botão */
+/* BOTÃO */
 .duel-button {
     font-size: large;
     font-weight: bolder;
-    position: absolute;
     padding: 10px 20px;
     background-color: #f00;
     color: #fff;
@@ -128,14 +139,6 @@ body {
 
 .duel-button:hover {
     background-color: #c00;
-}
-
-#player1-duel-button {
-    right: 1175px;
-}
-
-#player2-duel-button {
-    left: 1750px;
 }
 
 /* Barra de Vida */

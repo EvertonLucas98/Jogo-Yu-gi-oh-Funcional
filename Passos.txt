@@ -1,13 +1,13 @@
 Passos:
-	Página inicial do game			[FEITO!]
-		Da para jogar contra o computador? (TALVEZ)
-	Página do nome
-	Página de introdução (TALVEZ)		[FEITO!]
-	Música de fundo					[FEITO!]
-	Botão para mutar a musica (TALVEZ)
-	Colocar um vídeo ou de intro ou do grito "é hora do duelo"
-	Criar uma área de pré-visualização das cartas
-	Gif atrás das cartas do jogo (talvez)
+	"Back-end":
+		Modo para jogar contra o computador? (TALVEZ)
+		Página do nome
+		Botão para mutar a musica (TALVEZ)
+		Criar uma área de pré-visualização das cartas
+	"Front-end":
+		Gif atrás das cartas do jogo (talvez)
+		Avatar dos players
+		Estilizar a vida
 
 Bugs:
 	Nenhum 

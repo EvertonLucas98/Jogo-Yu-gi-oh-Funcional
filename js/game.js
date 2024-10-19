@@ -55,10 +55,13 @@ const infoValues = (event) => {
 // Função que adiciona a carta à área de duelo (2º)
 const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     const duelArea = document.querySelector('.duel')
-    const amountCards = duelArea.querySelectorAll('img')
+    const duelAreaCard1 = document.querySelector('.duel-card-1')
+    const duelAreaCard2 = document.querySelector('.duel-card-2')
+    const amountCards = duelArea.querySelectorAll('img').length
+    console.log(amountCards)
 
     // Verifica quantas cartas já estão na área de duelo
-    if (amountCards.length < 1 && alt=='face-up') {
+    if (amountCards < 2 && alt=='face-up') {
         // Se houver menos de 1 carta, adiciona a nova carta
         const cardElement = document.createElement('img')
         cardElement.src = cardSrc
@@ -70,12 +73,12 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         cardElement.style.width = '250px'
         cardElement.style.height = '350px'
 
-        duelArea.appendChild(cardElement)
+        duelAreaCard1.appendChild(cardElement)
         // Desabilita o deck superior
         disableDeck('top-deck')
         // Habilita o deck inferior
         enableDeck('bottom-deck')
-    } else if (amountCards.length < 2 && alt=='face-up') {
+    } else if (amountCards < 3 && alt=='face-up') {
         // Se houver menos de 2 cartas, adiciona a nova carta
         const cardElement = document.createElement('img')
         cardElement.src = cardSrc
@@ -87,7 +90,7 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         cardElement.style.width = '250px'
         cardElement.style.height = '350px'
         // Adiciona a carda à área de duelo
-        duelArea.appendChild(cardElement)
+        duelAreaCard2.appendChild(cardElement)
         // Elimina a carta do jogo
         // (incompleto)
         // Desabilita o deck superior
@@ -202,12 +205,12 @@ const otherAddToDuelArea = (alt) => {
     const amountCards = duelArea.querySelectorAll('img')
 
     // Verifica quantas cartas já estão na área de duelo
-    if (amountCards.length <= 1 && alt=='face-up') {
+    if (amountCards.length <= 2 && alt=='face-up') {
         // Desabilita o deck inferior
         disableDeck('bottom-deck')
         // Habilita o deck superior
         enableDeck('top-deck')
-    } else if (amountCards.length < 2 && alt=='face-up') {
+    } else if (amountCards.length < 3 && alt=='face-up') {
         // Desabilita o deck superior
         disableDeck('top-deck')
         // Habilita o deck inferior

@@ -35,13 +35,13 @@ body {
     font-weight: 600;
     font-size: 1.8em;
     padding: 40px 100px;
-    background-image: linear-gradient(rgb(24, 29, 51), rgb(224, 29, 51));
+    background-image: linear-gradient(rgb(224, 29, 51), rgb(24, 29, 51));
     color: #fff;
     border: none;
     clip-path: polygon(20% 10%, 79% 10%, 100% 50%, 80% 90%, 20% 90%, 0% 50%);
 }
 
 a:hover {
-    background-image: linear-gradient(rgb(224, 29, 51), rgb(24, 29, 51));
+    background-image: linear-gradient(rgb(24, 29, 51), rgb(224, 29, 51));
 
 }
