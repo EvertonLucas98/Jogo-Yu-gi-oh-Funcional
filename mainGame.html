@@ -6,27 +6,41 @@
     <title>Yu-Gi-Oh!</title>
     <link rel="shortcut icon" href="imgs/Favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/game.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <div class="left">
+        <div class="left" id="left">
             <div class="player-side">
-                <div class="health">
-                    <div id="player1-health">
-                        <p id="player1-Life-Amount">10000</p>
+                <div class="wrapper">
+                    <p id="player-name">PLAYER 1</p>
+                    <div class="health">
+                        <div id="player1-health">
+                            <p id="player1-Life-Amount">5000</p>
+                        </div>
                     </div>
+                    <div id="molding-top">
+                        <img src="imgs/yami-yugi.webp" alt="Avatar do Player">
+                    </div>
+                    <div id="card1-preview" class="card-preview"></div>
                 </div>
             </div>
-            <div class="score"></div>
             <div class="player-side">
-                <div class="health">
-                    <div id="player2-health">
-                        <p id="player2-Life-Amount">10000</p>
+                <div class="wrapper">
+                    <p id="player-name">PLAYER 2</p>
+                    <div class="health">
+                        <div id="player2-health">
+                            <p id="player2-Life-Amount">5000</p>
+                        </div>
                     </div>
+                    <div id="molding-bot"><img src="imgs/seto-kaiba.webp" alt="Avatar do Player"></div>
+                    <div id="card2-preview" class="card-preview"></div>
                 </div>
             </div>
         </div>
-        <div class="right">
+        <div class="right" id="right">
             <div id="top-deck" class="top-deck"></div>
             <div id="duel" class="duel">
                 <button id="player1-duel-button" class="duel-button">PLAYER01<br>ATACAR!</button>
@@ -36,6 +50,13 @@
                 <button id="player2-duel-button" class="duel-button">PLAYER02<br>ATACAR!</button>
             </div>
             <div id="bottom-deck" class="bottom-deck"></div>
+        </div>
+        <div id="result-screen">
+            <div id="position-result-screen">
+                <img src="imgs/victory.png" alt="Imagem do Resultado">
+                <h1 id="winner"></h1>
+                <button id="restart-button">CONTINUAR</button>
+            </div>
         </div>
     </div>
     <audio src="audios/duel-loop.mp3" id="duel-music-loop" loop="true"></audio>

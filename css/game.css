@@ -8,6 +8,54 @@ body {
     cursor: url('../imgs/cursor.png') 16 16, auto;
 }
 
+/* TELA DE VITÓRIA / DERROTA */
+#result-screen {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    filter: brightness(100%);
+    z-index: 1;
+}
+
+#position-result-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#restart-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    height: 35px;
+    position: absolute;
+    left: 46.58%;
+    top: 74%;
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 0.8em;
+    background-color: #f00;
+    color: #fff;
+    border-radius: 5px;
+    cursor: url('../imgs/Cursor.png') 16 16, auto;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+#restart-button:hover {
+    background-color: #c00;
+}
+
+#winner {
+    position: absolute;
+    left: 46.58%;
+    top: 49%;
+    color: rgb(224, 191, 0);
+}
+
+/* CONTAINERS DA ESQUERDA E DA DIREITA */
 .container {
     display: flex;
     height: 100vh;
@@ -25,11 +73,56 @@ body {
     background-position: center;
 }
 
+#left {
+    filter: brightness(100%);
+}
+
 .player-side {
     width: 30vw;
     height: 50vh;
     border-radius: 10px;
-    padding: 20px 50px 0px 50px;
+}
+
+#player-name {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px 40px 0px 40px;
+}
+
+.wrapper img {
+    width: 100px;
+    height: 85px;
+}
+
+.wrapper p {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: aliceblue;
+    font-size: 1.4em;
+}
+
+#molding-top {
+    width: 100px;
+    height: 88px;
+    border: 2px solid aliceblue;
+    background-color: royalblue;
+}
+
+#molding-bot {
+    width: 100px;
+    height: 88px;
+    border: 2px solid aliceblue;
+    background-color: crimson;
 }
 
 .right {
@@ -41,9 +134,12 @@ body {
     border-radius: 10px;
 }
 
+#right {
+    filter: brightness(100%);
+}
+
 .top-deck,
 .bottom-deck {
-    /* background-color: royalblue; */
     background-image: url(../imgs/table.png);
     background-size: cover;
     width: 70vw;
@@ -61,7 +157,6 @@ body {
 }
 
 .duel {
-    /* background-color: aqua; */
     width: 70vw;
     height: 40vh;
     display: flex;
@@ -72,14 +167,13 @@ body {
 .duel-card-1,
 .duel-card-2 {
     width: 250px;
-    height: 360px;
+    height: 356px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 8px solid whitesmoke;
-    border-radius: 10px;
+    border: 4px solid whitesmoke;
+    border-radius: 5px;
 }
-
 
 .duel img {
     width: 250px;
@@ -127,14 +221,17 @@ body {
 
 /* BOTÃO */
 .duel-button {
-    font-size: large;
-    font-weight: bolder;
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.4em;
     padding: 10px 20px;
     background-color: #f00;
     color: #fff;
     border: none;
     border-radius: 5px;
     cursor: url('../imgs/Cursor.png') 16 16, auto;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
 }
 
 .duel-button:hover {
@@ -155,15 +252,28 @@ body {
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: mediumseagreen;
+    background-color: royalblue;
     border-radius: 10px;
+    padding-top: 4px;
 }
+
 #player2-health {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
-    background-color: mediumseagreen;
+    background-color: crimson;
     border-radius: 10px;
+    padding-top: 5px;
+}
+
+/* CARDS PREVIEW */
+.card-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 350px;
+    padding-top: 10px;
 }

@@ -2,6 +2,8 @@ const player1LifeAmount = document.getElementById('player1-Life-Amount')
 const player2LifeAmount = document.getElementById('player2-Life-Amount')
 const player1LifeBar = document.getElementById('player1-health')
 const player2LifeBar = document.getElementById('player2-health')
+const resultScreen = document.getElementById('result-screen')
+const restartButton = document.getElementById('restart-button')
 
 const createCard = (frontUrl, atk, def, deck, position, backUrl='imgs/Down.jpg') => `
     <div class="flip-card">
@@ -41,7 +43,7 @@ const bottomDeckCards = [
 renderCards(topDeckCards, "top-deck")
 renderCards(bottomDeckCards, "bottom-deck")
 
-// Função que mostra na tela o valor do ataque e da defesa das respectivas cartas (1º)
+// Função obtém o valor do ataque, da defesa, do alt e do deck das respectivas cartas (1º)
 const infoValues = (event) => {
     const img = event.target
     const atk = img.getAttribute('data-atk')
@@ -50,6 +52,11 @@ const infoValues = (event) => {
     const deck = img.getAttribute('data-deck')
     // Adiciona a carta à área de duelo
     addToDuelArea(img.src, alt, atk, def, deck)
+    const containerCard = event.target.closest('.flip-card')
+    const childContainerCard = containerCard.querySelectorAll('div')[1]
+    const card = childContainerCard.querySelector('img')
+    console.log(card)
+    createPreview(card)
 }
 
 // Função que adiciona a carta à área de duelo (2º)
@@ -58,11 +65,9 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     const duelAreaCard1 = document.querySelector('.duel-card-1')
     const duelAreaCard2 = document.querySelector('.duel-card-2')
     const amountCards = duelArea.querySelectorAll('img').length
-    console.log(amountCards)
 
-    // Verifica quantas cartas já estão na área de duelo
+    // Verifica se existe não existe cartas viradas para cima na área de duelo e adiciona a nova carta selecionada
     if (amountCards < 2 && alt=='face-up') {
-        // Se houver menos de 1 carta, adiciona a nova carta
         const cardElement = document.createElement('img')
         cardElement.src = cardSrc
         cardElement.id = 'card1'
@@ -78,6 +83,7 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         disableDeck('top-deck')
         // Habilita o deck inferior
         enableDeck('bottom-deck')
+    // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
     } else if (amountCards < 3 && alt=='face-up') {
         // Se houver menos de 2 cartas, adiciona a nova carta
         const cardElement = document.createElement('img')
@@ -91,13 +97,36 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         cardElement.style.height = '350px'
         // Adiciona a carda à área de duelo
         duelAreaCard2.appendChild(cardElement)
-        // Elimina a carta do jogo
-        // (incompleto)
         // Desabilita o deck superior
         disableDeck('top-deck')
         // Habilita o deck inferior
         disableDeck('bottom-deck')
     }
+}
+
+// Função para criar uma imagem
+const createPreview = (card) => {
+    const cardPreviewSide = card.getAttribute('data-deck')
+    const cardPreviewSrc = card.getAttribute('src')
+    const topArea = document.getElementById('card1-preview')
+    const bottomArea = document.getElementById('card2-preview')
+    if (topArea.querySelector('img')) clearPreviewArea(topArea)
+    if (bottomArea.querySelector('img')) clearPreviewArea(bottomArea)
+    const cardCopia = document.createElement('img')
+    cardCopia.src = cardPreviewSrc
+    cardCopia.alt = "card-preview"
+    cardCopia.style.width = '260px'
+    cardCopia.style.height = '350px'
+    if (cardPreviewSide == 'top') {
+        topArea.appendChild(cardCopia)
+    } else {
+        bottomArea.appendChild(cardCopia)
+    }
+}
+
+// Função para limpar a área de pré-visualização
+const clearPreviewArea = (area) => {
+    area.querySelector('img').remove()
 }
 
 // Função para habilitar o deck
@@ -155,12 +184,11 @@ const applyDamageToPlayer1LifeBar = (damage, div) => {
     player1LifeBar.style.width = damage+"%"
     div.textContent -= Number(div.textContent)-(damage*100)
     if (div.textContent <= 0) {
-        alert('END GAME!\nO PLayer 2 foi o VENCEDOR!')
-        player1LifeAmount.textContent = 10000
-        player1LifeBar.style.width = 100+"%"
-        player2LifeAmount.textContent = 10000
-        player2LifeBar.style.width = 100+"%"
-        anotherRound('top-deck')
+        resultScreen.style.display = 'block'
+        document.getElementById('winner').innerText = 'PLAYER 2'
+        document.getElementById('right').style.filter = 'brightness(20%)'
+        document.getElementById('left').style.filter = 'brightness(20%)'
+        restartButton.addEventListener('click', restartGame)
     }
 }
 
@@ -169,13 +197,23 @@ const applyDamageToPlayer2LifeBar = (damage, div) => {
     player2LifeBar.style.width = damage+"%"
     div.textContent -= Number(div.textContent)-(damage*100)
     if (div.textContent <= 0) {
-        alert('END GAME!\nO PLayer 1 foi o VENCEDOR!')
-        player1LifeAmount.textContent = 10000
-        player1LifeBar.style.width = 100+"%"
-        player2LifeAmount.textContent = 10000
-        player2LifeBar.style.width = 100+"%"
-        anotherRound('top-deck')
+        resultScreen.style.display = 'block'
+        document.getElementById('winner').innerText = 'PLAYER 1'
+        document.getElementById('right').style.filter = 'brightness(20%)'
+        document.getElementById('left').style.filter = 'brightness(20%)'
+        restartButton.addEventListener('click', restartGame)
     }
+}
+
+const restartGame = () => {
+    document.getElementById('right').style.filter = 'brightness(100%)'
+    document.getElementById('left').style.filter = 'brightness(100%)'
+    resultScreen.style.display = 'none'
+    player1LifeAmount.textContent = 5000
+    player1LifeBar.style.width = 100+"%"
+    player2LifeAmount.textContent = 5000
+    player2LifeBar.style.width = 100+"%"
+    anotherRound('top-deck')
 }
 
 // Função que limpa a area de duelo (6º)
