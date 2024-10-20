@@ -55,8 +55,11 @@ const infoValues = (event) => {
     const containerCard = event.target.closest('.flip-card')
     const childContainerCard = containerCard.querySelectorAll('div')[1]
     const card = childContainerCard.querySelector('img')
-    console.log(card)
     createPreview(card)
+}
+
+const computerValues = (img) => {
+    addToDuelArea(img.src, img.alt, img.atk, img.def, img.deck)
 }
 
 // Função que adiciona a carta à área de duelo (2º)
@@ -82,7 +85,8 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         // Desabilita o deck superior
         disableDeck('top-deck')
         // Habilita o deck inferior
-        enableDeck('bottom-deck')
+        cardComputer('bottom-deck')
+        // enableDeck('bottom-deck')
     // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
     } else if (amountCards < 3 && alt=='face-up') {
         // Se houver menos de 2 cartas, adiciona a nova carta
@@ -129,6 +133,20 @@ const clearPreviewArea = (area) => {
     area.querySelector('img').remove()
 }
 
+const cardComputer = (containerId) => {
+    const container = document.getElementById(containerId)
+    const childsContainer = container.querySelectorAll('div')[14]
+    const cardComputer = childsContainer.querySelector('img')
+    return computerValues(cardComputer)
+}
+
+const cardComputerSecondRound = (containerId) => {
+    const container = document.getElementById(containerId)
+    const childsContainer = container.querySelectorAll('div')[8]
+    const cardComputer = childsContainer.querySelector('img')
+    return computerValues(cardComputer)
+}
+
 // Função para habilitar o deck
 const enableDeck = (containerId) => {
     const container = document.getElementById(containerId)
@@ -157,13 +175,11 @@ const duelButtonEvent = () => {
     const card1 = document.getElementById('card1')
     const card2 = document.getElementById('card2')
     const atkCard1 = card1.getAttribute('data-atk')
-    const defCard2 = card2.getAttribute('data-def')
     const deckCard1 = card1.getAttribute('data-deck')
-    duelDamage(atkCard1, defCard2, deckCard1)
-    cleanDuelArea()
+    duelDamage(atkCard1, 1600, deckCard1)
+    cleanDuelArea(card1, card2)
     disableDuelButtonEvent('player1-duel-button')
-    enableDuelButtonEvent('player2-duel-button')
-    otherRound('bottom-deck')
+    otherComputerValues('bottom-deck')
 }
 
 // Função que calcula o dano (4º)
@@ -205,22 +221,21 @@ const applyDamageToPlayer2LifeBar = (damage, div) => {
     }
 }
 
-// Função que reinicia os valores da vida
 const restartGame = () => {
     document.getElementById('right').style.filter = 'brightness(100%)'
     document.getElementById('left').style.filter = 'brightness(100%)'
     resultScreen.style.display = 'none'
-    player1LifeAmount.textContent = 10000
+    player1LifeAmount.textContent = 5000
     player1LifeBar.style.width = 100+"%"
-    player2LifeAmount.textContent = 10000
+    player2LifeAmount.textContent = 5000
     player2LifeBar.style.width = 100+"%"
     anotherRound('top-deck')
 }
 
 // Função que limpa a area de duelo (6º)
-const cleanDuelArea = () => {
-    document.getElementById('card1').remove()
-    document.getElementById('card2').remove()
+const cleanDuelArea = (card1, card2) => {
+    card1.remove()
+    card2.remove()
 }
 
 // Função para fazer o deck inferior começar jogando (7º)
@@ -238,6 +253,10 @@ const otherInfoValues = (event) => {
     otherAddToDuelArea(alt)
 }
 
+const otherComputerValues = (img) => {
+    otherAddToDuelArea(img)
+}
+
 // Função que adiciona a carta à área de duelo (9º)
 const otherAddToDuelArea = (alt) => {
     const duelArea = document.querySelector('.duel')
@@ -247,8 +266,9 @@ const otherAddToDuelArea = (alt) => {
     if (amountCards.length <= 2 && alt=='face-up') {
         // Desabilita o deck inferior
         disableDeck('bottom-deck')
+        cardComputerSecondRound('bottom-deck')
         // Habilita o deck superior
-        enableDeck('top-deck')
+        // enableDeck('top-deck')
     } else if (amountCards.length < 3 && alt=='face-up') {
         // Desabilita o deck superior
         disableDeck('top-deck')
@@ -264,7 +284,7 @@ const otherDuelButtonEvent = () => {
     const atkCard1 = card1.getAttribute('data-atk')
     const defCard2 = card2.getAttribute('data-def')
     duelDamage(atkCard1, defCard2)
-    cleanDuelArea()
+    cleanDuelArea(card1, card2)
     enableDuelButtonEvent('player1-duel-button')
     disableDuelButtonEvent('player2-duel-button')
     anotherRound('top-deck')

@@ -21,6 +21,7 @@ body {
     background-size: cover;
     background-position: center;
     animation: fadeInFadeOut 4s linear infinite;
+    cursor: url('../imgs/Cursor.png') 16 16, auto;
 }
 
 @keyframes fadeInFadeOut {
@@ -30,18 +31,62 @@ body {
 }
 
 .button {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.6em;
     position: relative;
-    font-size: large;
-    font-weight: 600;
-    font-size: 1.8em;
     padding: 40px 100px;
-    background-image: linear-gradient(rgb(224, 29, 51), rgb(24, 29, 51));
-    color: #fff;
+    background-image: linear-gradient(crimson, rgb(26, 26, 26));
+    color: aliceblue;
     border: none;
     clip-path: polygon(20% 10%, 79% 10%, 100% 50%, 80% 90%, 20% 90%, 0% 50%);
+    cursor: url('../imgs/Cursor.png') 16 16, auto;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
 }
 
 a:hover {
-    background-image: linear-gradient(rgb(24, 29, 51), rgb(224, 29, 51));
+    background-image: linear-gradient(crimson, aliceblue);
+    color: rgb(26, 26, 26);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
 
+}
+
+/* BOTÕES DE AUDIO */
+#music-play {
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 45px;
+    position: absolute;
+    left: 4%;
+    top: 90%;
+    font-size: 1.4em;
+    background-image: linear-gradient(crimson, rgb(26, 26, 26));
+    color: aliceblue;
+    border-radius: 5px;
+    cursor: url('../imgs/Cursor.png') 16 16, auto;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+#music-stop {
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 45px;
+    position: absolute;
+    left: 8%;
+    top: 90%;
+    font-size: 1.4em;
+    background-image: linear-gradient(crimson, rgb(26, 26, 26));
+    color: aliceblue;
+    border-radius: 5px;
+    cursor: url('../imgs/Cursor.png') 16 16, auto;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+#music-play:hover,
+#music-stop:hover {
+    background-image: linear-gradient(crimson, aliceblue);
+    color: rgb(26, 26, 26);
 }
