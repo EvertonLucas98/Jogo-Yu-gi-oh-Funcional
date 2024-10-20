@@ -163,6 +163,8 @@ const duelButtonEvent = () => {
     cleanDuelArea()
     disableDuelButtonEvent('player1-duel-button')
     enableDuelButtonEvent('player2-duel-button')
+    renderCards(topDeckCards, "top-deck")
+    renderCards(bottomDeckCards, "bottom-deck")
     otherRound('bottom-deck')
 }
 
@@ -267,6 +269,8 @@ const otherDuelButtonEvent = () => {
     cleanDuelArea()
     enableDuelButtonEvent('player1-duel-button')
     disableDuelButtonEvent('player2-duel-button')
+    renderCards(topDeckCards, "top-deck")
+    renderCards(bottomDeckCards, "bottom-deck")
     anotherRound('top-deck')
 }
 
