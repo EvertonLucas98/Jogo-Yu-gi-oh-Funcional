@@ -1,13 +1,8 @@
 Passos:
 	"Back-end":
-		Modo para jogar contra o computador? (TALVEZ)
-		Botão para mutar a musica (TALVEZ)		[FEITO!]
-		Criar uma área de pré-visualização das cartas	[FEITO!]
+		Modo para jogar contra o computador
 	"Front-end":
-		Gif atrás das cartas do jogo (talvez)		[FEITO!]
-		Avatar dos players					[FEITO!]
-		Estilizar a vida						[FEITO!]
-		Virar todas cartas para baixo depois da jogada
+		Tornar o game mais responsivo
 
 Bugs:
 	Nenhum 

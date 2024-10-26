@@ -115,8 +115,8 @@ const createPreview = (card) => {
     const cardCopia = document.createElement('img')
     cardCopia.src = cardPreviewSrc
     cardCopia.alt = "card-preview"
-    cardCopia.style.width = '260px'
-    cardCopia.style.height = '350px'
+    cardCopia.style.width = '15em'
+    cardCopia.style.height = '22.5em'
     if (cardPreviewSide == 'top') {
         topArea.appendChild(cardCopia)
     } else {
