@@ -535,7 +535,7 @@ body {
     
     .flip-card {
         width: 2.5em;
-        height: 8.6em; 
+        height: 5em; 
     }
     
     .top-deck,
@@ -547,8 +547,7 @@ body {
     .top-deck img,
     .bottom-deck img {
         width: 2.5em;
-        height: 8.6em;
-        margin-top: 0.2em;
+        height: 5em;
     }
 
     .duel-button {
