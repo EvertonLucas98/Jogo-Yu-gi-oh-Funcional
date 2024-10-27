@@ -85,9 +85,10 @@ body {
 
 #player-name {
     width: 100%;
-    height: 1.5em;
-    padding: 5px;
+    height: 50%;
+    padding: 0.1em;
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+    font-size: 1.2em;
 }
 
 .wrapper {
@@ -96,7 +97,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 2em 2em 0em 2em;
+    padding: 1em 1em 0em 1em;
 }
 
 .wrapper-name-life-bar {
@@ -104,17 +105,9 @@ body {
     height: 16%;
 }
 
-.avatar-card-preview {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
 .wrapper img {
-    width: 100px;
-    height: 85px;
+    width: 6.5em;
+    height: 5.25em;
 }
 
 .wrapper p {
@@ -126,15 +119,15 @@ body {
 }
 
 #molding-top {
-    width: 100px;
-    height: 88px;
+    width: 6.2em;
+    height: 5.5em;
     border: 2px solid aliceblue;
     background-color: royalblue;
 }
 
 #molding-bot {
-    width: 100px;
-    height: 88px;
+    width: 6.2em;
+    height: 5.5em;
     border: 2px solid aliceblue;
     background-color: crimson;
 }
@@ -160,14 +153,14 @@ body {
     height: 30vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .top-deck img,
 .bottom-deck img {
-    width: 150px;
-    height: 220px;
-    margin-top: 2px;
+    width: 10.8em;
+    height: 13.8em;
+    margin-top: 0.2em;
 }
 
 .duel {
@@ -175,13 +168,13 @@ body {
     height: 40vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .duel-card-1,
 .duel-card-2 {
-    width: 250px;
-    height: 356px;
+    width: 15.5em;
+    height: 20.5em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -189,21 +182,16 @@ body {
     border-radius: 5px;
 }
 
-.duel img {
-    width: 250px;
-    height: 350px;
-}
-
 #duel-icon {
-    width: 200px;
-    height: 200px;
+    width: 12em;
+    height: 12em;
 }
 
 /* FLIP */
 .flip-card {
     position: relative;
-    width: 150px;
-    height: 220px;
+    width: 10.8em;
+    height: 13.8em;
     transition: 0.8s;
     transform-style: preserve-3d;
     perspective: 1000px;
@@ -233,28 +221,10 @@ body {
     height: 100%;
 }
 
-/* BOTÃO */
-.duel-button {
-    font-family: "Press Start 2P", system-ui;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1.4em;
-    padding: 10px 20px;
-    background-color: #f00;
-    color: #fff;
-    border-radius: 5px;
-    cursor: url('../imgs/Cursor.png') 16 16, auto;
-    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
-}
-
-.duel-button:hover {
-    background-color: #c00;
-}
-
 /* Barra de Vida */
 .health {
     width: 100%;
-    height: 30px;
+    height: 50%;
     background-color: #a8a8a8e3;
     border-radius: 10px;
 }
@@ -267,7 +237,7 @@ body {
     height: 100%;
     background-color: royalblue;
     border-radius: 10px;
-    padding-top: 4px;
+    
 }
 
 #player2-health {
@@ -278,26 +248,56 @@ body {
     height: 100%;
     background-color: crimson;
     border-radius: 10px;
-    padding-top: 5px;
+    padding-top: 0.2em;
 }
 
 /* CARDS PREVIEW */
+.avatar-card-preview {
+    width: 100%;
+    height: 84%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 0.4em;
+}
+
 .card-preview {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    width: 260px;
-    height: 350px;
+    width: 20em;
+    height: 94%;
+}
+
+/* BOTÕES DE DUELO */
+.duel-button {
+    width: 9em;
+    height: 3.5em;
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.4em;
+    padding: 0.4em 0.4em;
+    background-color: #f00;
+    color: #fff;
+    border-radius: 15px;
+    cursor: url('../imgs/Cursor.png') 16 16, auto;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
+}
+
+.duel-button:hover {
+    background-color: #c00;
 }
 
 /* BOTÕES DE AUDIO */
 #music-play {
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 40px;
+    width: 2em;
+    height: 2em;
     position: absolute;
-    left: 1.5%;
+    left: 5%;
     top: 91.2%;
     font-size: 1.4em;
     background-color: crimson;
@@ -308,12 +308,13 @@ body {
 }
 
 #music-stop {
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 40px;
+    width: 2em;
+    height: 2em;
     position: absolute;
-    left: 4%;
+    left: 15%;
     top: 91.2%;
     font-size: 1.4em;
     background-color: crimson;
@@ -326,4 +327,68 @@ body {
 #music-play:hover,
 #music-stop:hover {
     background-color: rgb(160, 20, 50);
+}
+
+/* Notebooks */
+@media screen and (min-width: 1081px) and (max-width: 1450px) {
+    .left {
+        background-image: url(../imgs/background-left-notebook.png);
+    }
+    
+    .flip-card {
+        width: 8.8em;
+        height: 11.5em; 
+    }
+    
+    .top-deck,
+    .bottom-deck {
+        background-image: url(../imgs/table-notebook.png);
+        justify-content: space-evenly;
+    }
+
+    .top-deck img,
+    .bottom-deck img {
+        width: 8.8em;
+        height: 11.5em;
+        margin-top: 0.2em;
+    }
+
+    .duel-button {
+        height: 3.4em;
+        font-size: 0.9em;
+    }
+
+    .duel-card-1,
+    .duel-card-2 {
+        width: 14em;
+        height: 18.5em;
+    }
+    
+    #duel-icon {
+        width: 8em;
+        height: 8em;
+    }
+
+    #music-play {
+        left: 5%;
+    }
+
+    #music-stop {
+        left: 20%;
+    }
+}
+
+/* TABLETS */
+@media screen and (min-width: 451px) and (max-width: 1080px) {
+    .bottom-deck {
+        display: none;
+    }
+}
+
+/* CELULARES */
+@media screen and (max-width: 450px) {
+    .top-deck,
+    .bottom-deck {
+        display: flex;
+    }
 }

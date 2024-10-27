@@ -65,6 +65,7 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     const duelAreaCard1 = document.querySelector('.duel-card-1')
     const duelAreaCard2 = document.querySelector('.duel-card-2')
     const amountCards = duelArea.querySelectorAll('img').length
+    const width = window.innerWidth;
 
     // Verifica se existe não existe cartas viradas para cima na área de duelo e adiciona a nova carta selecionada
     if (amountCards < 2 && alt=='face-up') {
@@ -75,9 +76,16 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         cardElement.setAttribute("data-atk", atk)
         cardElement.setAttribute("data-def", def)
         cardElement.setAttribute("data-deck", deck)
-        cardElement.style.width = '250px'
-        cardElement.style.height = '350px'
-
+        if (width < 451) {
+            // cardElement.style.width = '15em'
+            // cardElement.style.height = '22em'
+        } else if (width < 1451) {
+            cardElement.style.width = '13.5em'
+            cardElement.style.height = '18em'
+        } else {
+            cardElement.style.width = '15em'
+            cardElement.style.height = '20em'
+        }
         duelAreaCard1.appendChild(cardElement)
         // Desabilita o deck superior
         disableDeck('top-deck')
@@ -93,8 +101,16 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         cardElement.setAttribute("data-atk", atk)
         cardElement.setAttribute("data-def", def)
         cardElement.setAttribute("data-deck", deck)
-        cardElement.style.width = '250px'
-        cardElement.style.height = '350px'
+        if (width < 451) {
+            // cardElement.style.width = '15em'
+            // cardElement.style.height = '22em'
+        } else if (width < 1451) {
+            cardElement.style.width = '13.5em'
+            cardElement.style.height = '18em'
+        } else {
+            cardElement.style.width = '15em'
+            cardElement.style.height = '20em'
+        }
         // Adiciona a carda à área de duelo
         duelAreaCard2.appendChild(cardElement)
         // Desabilita o deck superior
@@ -115,8 +131,8 @@ const createPreview = (card) => {
     const cardCopia = document.createElement('img')
     cardCopia.src = cardPreviewSrc
     cardCopia.alt = "card-preview"
-    cardCopia.style.width = '15em'
-    cardCopia.style.height = '22.5em'
+    cardCopia.style.width = '80%'
+    cardCopia.style.height = '100%'
     if (cardPreviewSide == 'top') {
         topArea.appendChild(cardCopia)
     } else {
