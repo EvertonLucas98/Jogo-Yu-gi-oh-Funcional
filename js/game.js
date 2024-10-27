@@ -246,9 +246,9 @@ const restartGame = () => {
     document.getElementById('right').style.filter = 'brightness(100%)'
     document.getElementById('left').style.filter = 'brightness(100%)'
     resultScreen.style.display = 'none'
-    player1LifeAmount.textContent = 10000
+    player1LifeAmount.textContent = 100
     player1LifeBar.style.width = 100+"%"
-    player2LifeAmount.textContent = 10000
+    player2LifeAmount.textContent = 100
     player2LifeBar.style.width = 100+"%"
     anotherRound('top-deck')
 }

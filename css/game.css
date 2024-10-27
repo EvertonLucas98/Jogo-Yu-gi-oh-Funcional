@@ -4,11 +4,13 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
     cursor: url('../imgs/cursor.png') 16 16, auto;
+    width: 100%;
+    height: 100%;
 }
 
-/* TELA DE VITÓRIA / DERROTA */
+/* TELA DE VITÓRIA E DERROTA */
 #result-screen {
     display: none;
     position: absolute;
@@ -28,8 +30,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 130px;
-    height: 35px;
+    width: 10em;
+    height: 2.5em;
     position: absolute;
     left: 46.58%;
     top: 74%;
@@ -55,13 +57,14 @@ body {
     color: rgb(224, 191, 0);
 }
 
-/* CONTAINERS DA ESQUERDA E DA DIREITA */
+/* CONTAINER PRINCIPAL */
 .container {
     display: flex;
     height: 100vh;
     width: 100vw;
 }
 
+/* CONTAINER DA ESQUERDA */
 .left {
     background-color: tomato;
     display: flex;
@@ -132,6 +135,7 @@ body {
     background-color: crimson;
 }
 
+/* CONTAINER DA DIREITA  */
 .right {
     background-image: url(../imgs/background-GIF.gif);
     width: 70vw;
@@ -163,6 +167,7 @@ body {
     margin-top: 0.2em;
 }
 
+/* AREA DO DUELO */
 .duel {
     width: 70vw;
     height: 40vh;
@@ -187,7 +192,7 @@ body {
     height: 12em;
 }
 
-/* FLIP */
+/* FLIP DAS CARTAS */
 .flip-card {
     position: relative;
     width: 10.8em;
@@ -221,7 +226,7 @@ body {
     height: 100%;
 }
 
-/* Barra de Vida */
+/* BARRA DE VIDA */
 .health {
     width: 100%;
     height: 50%;
@@ -329,7 +334,7 @@ body {
     background-color: rgb(160, 20, 50);
 }
 
-/* Notebooks */
+/* NOTEBOOKS */
 @media screen and (min-width: 1081px) and (max-width: 1450px) and (max-height: 755px) {
     .left {
         background-image: url(../imgs/background-left-notebook.png);
@@ -337,7 +342,7 @@ body {
     
     .flip-card {
         width: 8.8em;
-        height: 10.5em; 
+        height: 10.5em;
     }
     
     .top-deck,
@@ -386,8 +391,26 @@ body {
     #player-name {
         font-size: 1.2em;
     }
+
     .wrapper p {
         font-size: 1.2em;
+    }
+
+    /* TELA DE VITORIA E DERROTA */
+    #position-result-screen img {
+        width: 60em;
+        height: 44em;
+    }
+
+    #winner {
+        left: 45%;
+        top: 46%;
+    }
+
+    #restart-button {
+        width: 10em;
+        height: 2.2em;
+        left: 45.6%;
     }
 }
 
@@ -449,6 +472,23 @@ body {
     }
     .wrapper p {
         font-size: 1em;
+    }
+
+    /* TELA DE VITORIA E DERROTA */
+    #position-result-screen img {
+        width: 50em;
+        height: 34em;
+    }
+
+    #winner {
+        left: 46%;
+        top: 47.5%;
+        font-size: 1.5em;
+    }
+
+    #restart-button {
+        left: 46.4%;
+        font-size: 0.6em;
     }
 }
 
@@ -525,6 +565,23 @@ body {
         width: 2.8em;
         height: 2.8em;
     }
+
+    /* TELA DE VITORIA E DERROTA */
+    #position-result-screen img {
+        width: 50em;
+        height: 34em;
+    }
+
+    #winner {
+        left: 45%;
+        top: 45%;
+        font-size: 1.5em;
+    }
+
+    #restart-button {
+        left: 46.4%;
+        font-size: 0.55em;
+    }
 }
 
 /* CELULARES */
@@ -600,78 +657,22 @@ body {
         width: 1.8em;
         height: 1.8em;
     }
-}
 
-@media screen and (max-width: 450px) {
-    .left {
-        background-image: url(../imgs/background-left-notebook.png);
-    }
-    
-    .flip-card {
-        width: 2.5em;
-        height: 5em; 
-    }
-    
-    .top-deck,
-    .bottom-deck {
-        background-image: url(../imgs/table-notebook.png);
-        justify-content: space-evenly;
+    /* TELA DE VITORIA E DERROTA */
+    #position-result-screen img {
+        width: 35em;
+        height: 24em;
     }
 
-    .top-deck img,
-    .bottom-deck img {
-        width: 2.5em;
-        height: 5em;
-    }
-
-    .duel-button {
-        height: 4em;
-        font-size: 0.3em;
-    }
-
-    .duel-card-1,
-    .duel-card-2 {
-        width: 5em;
-        height: 8.5em;
-    }
-    
-    #duel-icon {
-        width: 3em;
-        height: 3em;
-    }
-
-    #music-play {
-        width: 1.5em;
-        height: 1.5em;
+    #winner {
+        left: 46%;
+        top: 51%;
         font-size: 1em;
-        left: 5%;
-        top: 90%;
     }
 
-    #music-stop {
-        width: 1.5em;
-        height: 1.5em;
-        font-size: 1em;
-        left: 28%;
-        top: 90%;
-    }
-
-    #player-name {
-        font-size: 0.5em;
-    }
-
-    .wrapper p {
-        font-size: 0.5em;
-    }
-
-    #molding-top,
-    #molding-bot {
-        width: 2em;
-        height: 2em;
-    }
-
-    .wrapper img {
-        width: 1.8em;
-        height: 1.8em;
+    #restart-button {
+        left: 46%;
+        top: 80%;
+        font-size: 0.4em;
     }
 }

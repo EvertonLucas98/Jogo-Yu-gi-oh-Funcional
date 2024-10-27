@@ -3,6 +3,8 @@ Passos:
 		Modo para jogar contra o computador
 	"Front-end":
 		Tornar o game mais responsivo
+			Tela do index
+			Tela da introdução
 
 Bugs:
-	Nenhum 
+	Bug do restart
