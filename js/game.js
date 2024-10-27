@@ -79,6 +79,9 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         if (width < 451) {
             cardElement.style.width = '4.5em'
             cardElement.style.height = '8em'
+        } else if (width < 1081 && height < 450) {
+            cardElement.style.width = '7em'
+            cardElement.style.height = '8.5em'
         } else if (width < 1081) {
             cardElement.style.width = '10.5em'
             cardElement.style.height = '14em'
@@ -110,6 +113,9 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         if (width < 451) {
             cardElement.style.width = '4.5em'
             cardElement.style.height = '8em'
+        } else if (width < 1081 && height < 450) {
+            cardElement.style.width = '7em'
+            cardElement.style.height = '8.5em'
         } else if (width < 1081) {
             cardElement.style.width = '10.5em'
             cardElement.style.height = '14em'

@@ -528,6 +528,80 @@ body {
 }
 
 /* CELULARES */
+@media screen and (min-width: 451px) and (max-width: 1080px) and (max-height: 450px) {
+    .left {
+        background-image: url(../imgs/background-left-notebook.png);
+    }
+    
+    .flip-card {
+        width: 4em;
+        height: 5.5em; 
+    }
+    
+    .top-deck,
+    .bottom-deck {
+        background-image: url(../imgs/table-notebook.png);
+        justify-content: space-evenly;
+    }
+
+    .top-deck img,
+    .bottom-deck img {
+        width: 4em;
+        height: 5.5em;
+    }
+
+    .duel-button {
+        height: 4.5em;
+        font-size: 0.5em;
+    }
+
+    .duel-card-1,
+    .duel-card-2 {
+        width: 7.5em;
+        height: 9em;
+    }
+    
+    #duel-icon {
+        width: 5em;
+        height: 5em;
+    }
+
+    #music-play {
+        width: 1.5em;
+        height: 1.5em;
+        font-size: 1em;
+        left: 5%;
+        top: 90%;
+    }
+
+    #music-stop {
+        width: 1.5em;
+        height: 1.5em;
+        font-size: 1em;
+        left: 18%;
+        top: 90%;
+    }
+
+    #player-name {
+        font-size: 0.5em;
+    }
+
+    .wrapper p {
+        font-size: 0.5em;
+    }
+
+    #molding-top,
+    #molding-bot {
+        width: 2em;
+        height: 2em;
+    }
+
+    .wrapper img {
+        width: 1.8em;
+        height: 1.8em;
+    }
+}
+
 @media screen and (max-width: 450px) {
     .left {
         background-image: url(../imgs/background-left-notebook.png);
