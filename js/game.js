@@ -80,8 +80,8 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
             // cardElement.style.width = '15em'
             // cardElement.style.height = '22em'
         } else if (width < 1451) {
-            cardElement.style.width = '13.5em'
-            cardElement.style.height = '18em'
+            cardElement.style.width = '10.5em'
+            cardElement.style.height = '13.5em'
         } else {
             cardElement.style.width = '15em'
             cardElement.style.height = '20em'
@@ -105,8 +105,8 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
             // cardElement.style.width = '15em'
             // cardElement.style.height = '22em'
         } else if (width < 1451) {
-            cardElement.style.width = '13.5em'
-            cardElement.style.height = '18em'
+            cardElement.style.width = '10.5em'
+            cardElement.style.height = '13.5em'
         } else {
             cardElement.style.width = '15em'
             cardElement.style.height = '20em'
@@ -131,7 +131,7 @@ const createPreview = (card) => {
     const cardCopia = document.createElement('img')
     cardCopia.src = cardPreviewSrc
     cardCopia.alt = "card-preview"
-    cardCopia.style.width = '80%'
+    cardCopia.style.width = '70%'
     cardCopia.style.height = '100%'
     if (cardPreviewSide == 'top') {
         topArea.appendChild(cardCopia)
