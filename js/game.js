@@ -55,7 +55,6 @@ const infoValues = (event) => {
     const containerCard = event.target.closest('.flip-card')
     const childContainerCard = containerCard.querySelectorAll('div')[1]
     const card = childContainerCard.querySelector('img')
-    console.log(card)
     createPreview(card)
 }
 
@@ -66,6 +65,7 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     const duelAreaCard2 = document.querySelector('.duel-card-2')
     const amountCards = duelArea.querySelectorAll('img').length
     const width = window.innerWidth;
+    const height = window.innerHeight;
 
     // Verifica se existe não existe cartas viradas para cima na área de duelo e adiciona a nova carta selecionada
     if (amountCards < 2 && alt=='face-up') {
@@ -77,11 +77,17 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         cardElement.setAttribute("data-def", def)
         cardElement.setAttribute("data-deck", deck)
         if (width < 451) {
-            // cardElement.style.width = '15em'
-            // cardElement.style.height = '22em'
-        } else if (width < 1451) {
+            cardElement.style.width = '4.5em'
+            cardElement.style.height = '8em'
+        } else if (width < 1081) {
+            cardElement.style.width = '10.5em'
+            cardElement.style.height = '14em'
+        } else if (width < 1451 && height < 571) {
             cardElement.style.width = '10.5em'
             cardElement.style.height = '13.5em'
+        } else if (width < 1451 && height < 756) {
+            cardElement.style.width = '10.5em'
+            cardElement.style.height = '15.5em'
         } else {
             cardElement.style.width = '15em'
             cardElement.style.height = '20em'
@@ -102,11 +108,17 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         cardElement.setAttribute("data-def", def)
         cardElement.setAttribute("data-deck", deck)
         if (width < 451) {
-            // cardElement.style.width = '15em'
-            // cardElement.style.height = '22em'
-        } else if (width < 1451) {
+            cardElement.style.width = '4.5em'
+            cardElement.style.height = '8em'
+        } else if (width < 1081) {
+            cardElement.style.width = '10.5em'
+            cardElement.style.height = '14em'
+        } else if (width < 1451 && height < 571) {
             cardElement.style.width = '10.5em'
             cardElement.style.height = '13.5em'
+        } else if (width < 1451 && height < 756) {
+            cardElement.style.width = '10.5em'
+            cardElement.style.height = '15.5em'
         } else {
             cardElement.style.width = '15em'
             cardElement.style.height = '20em'
