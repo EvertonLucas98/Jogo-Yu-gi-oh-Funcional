@@ -499,6 +499,7 @@ html, body {
     #restart-button {
         left: 46.4%;
         font-size: 0.6em;
+        cursor: url('../imgs/cursor-notebook.png') 16 16, auto;
     }
 }
 

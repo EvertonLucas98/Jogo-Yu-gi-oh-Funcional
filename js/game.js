@@ -5,6 +5,7 @@ const player2LifeBar = document.getElementById('player2-health')
 const resultScreen = document.getElementById('result-screen')
 const restartButton = document.getElementById('restart-button')
 
+// Cria os elementos que serão plotados no html
 const createCard = (frontUrl, atk, def, deck, position, backUrl='imgs/Down.jpg') => `
     <div class="flip-card">
         <div class="flip-card-front">
@@ -43,19 +44,18 @@ const bottomDeckCards = [
 renderCards(topDeckCards, "top-deck")
 renderCards(bottomDeckCards, "bottom-deck")
 
-// Função obtém o valor do ataque, da defesa, do alt e do deck das respectivas cartas (1º)
+// Função que obtém o valor os atributos das respectivas cartas (1º)
 const infoValues = (event) => {
     const img = event.target
     const atk = img.getAttribute('data-atk')
     const def = img.getAttribute('data-def')
     const alt = img.getAttribute('alt')
     const deck = img.getAttribute('data-deck')
-    // Adiciona a carta à área de duelo
-    addToDuelArea(img.src, alt, atk, def, deck)
     const containerCard = event.target.closest('.flip-card')
     const childContainerCard = containerCard.querySelectorAll('div')[1]
     const card = childContainerCard.querySelector('img')
-    createPreview(card)
+    // Adiciona a carta à área de duelo e à área de pré-visualização
+    return (addToDuelArea(img.src, alt, atk, def, deck), createPreview(card))
 }
 
 // Função que adiciona a carta à área de duelo (2º)
@@ -67,7 +67,7 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    // Verifica se existe não existe cartas viradas para cima na área de duelo e adiciona a nova carta selecionada
+    // Verifica se já existe uma carta virada para cima na área de duelo e adiciona a carta selecionada
     if (amountCards < 2 && alt=='face-up') {
         const cardElement = document.createElement('img')
         cardElement.src = cardSrc
