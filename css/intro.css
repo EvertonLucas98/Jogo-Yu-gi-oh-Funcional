@@ -29,9 +29,6 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: end;
-    position: relative;
-    top: 10%;
-    padding-top: 2em;
     flex-direction: column;
     text-align: center;
     color: black;
@@ -43,7 +40,7 @@ html, body {
     width: 100%;
     font-family: "Press Start 2P", system-ui;
     text-align: center;
-    padding-bottom: 0.5em;
+    padding-bottom: 0.2em;
 }
 
 .instructions p {
@@ -92,11 +89,16 @@ a:hover {
         cursor: url('../imgs/cursor-notebook.png') 16 16, auto;
     }
     
+    .container {
+        background-image: url(../imgs/parchment-2.jpg);
+        justify-content: flex-end;
+    }
+
     .instructions {
-        width: 27em;
-        height: 18em;
+        width: 30em;
+        height: 22em;
+        display: flex;
         align-items: end;
-        padding: 0em;
     }
     
     .instructions h4 {
@@ -110,7 +112,7 @@ a:hover {
         font-family: "Press Start 2P", system-ui;
         font-weight: 400;
         font-style: normal;
-        font-size: 0.55em;
+        font-size: 0.66em;
     }
 
     .button {
@@ -125,9 +127,10 @@ a:hover {
     }
 
     .buttons {
+        display: flex;
+        align-items: start;
         width: 40%;
         height: 4em;
-        position: relative;
-        top: 10%;
+        margin-bottom: 2em;
     }
 }

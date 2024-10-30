@@ -308,6 +308,7 @@ html, body {
     background-color: crimson;
     color: aliceblue;
     border-radius: 5px;
+    padding-right: 0.2em;
     cursor: url('../imgs/cursor.png') 16 16, auto;
     text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
 }
