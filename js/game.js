@@ -55,7 +55,7 @@ const infoValues = (event) => {
     const childContainerCard = containerCard.querySelectorAll('div')[1]
     const card = childContainerCard.querySelector('img')
     // Adiciona a carta à área de duelo e à área de pré-visualização
-    return (addToDuelArea(img.src, alt, atk, def, deck), createPreview(card))
+    return (addToDuelArea(img.src, alt, atk, def, deck), createPreviewCard(card))
 }
 
 // Função que adiciona a carta à área de duelo (2º)
@@ -69,83 +69,64 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
 
     // Verifica se já existe uma carta virada para cima na área de duelo e adiciona a carta selecionada
     if (amountCards < 2 && alt=='face-up') {
-        const cardElement = document.createElement('img')
-        cardElement.src = cardSrc
-        cardElement.id = 'card1'
-        cardElement.alt = "card1-in-duel"
-        cardElement.setAttribute("data-atk", atk)
-        cardElement.setAttribute("data-def", def)
-        cardElement.setAttribute("data-deck", deck)
-        if (width < 451) {
-            cardElement.style.width = '4.5em'
-            cardElement.style.height = '8em'
-        } else if (width < 1081 && height < 450) {
-            cardElement.style.width = '7em'
-            cardElement.style.height = '8.5em'
-        } else if (width < 1081) {
-            cardElement.style.width = '10.5em'
-            cardElement.style.height = '14em'
-        } else if (width < 1451 && height < 571) {
-            cardElement.style.width = '10.5em'
-            cardElement.style.height = '13.5em'
-        } else if (width < 1451 && height < 756) {
-            cardElement.style.width = '10.5em'
-            cardElement.style.height = '15.5em'
-        } else {
-            cardElement.style.width = '15em'
-            cardElement.style.height = '20em'
-        }
-        duelAreaCard1.appendChild(cardElement)
-        // Desabilita o deck superior
-        disableDeck('top-deck')
-        // Habilita o deck inferior
-        enableDeck('bottom-deck')
-    // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
-    } else if (amountCards < 3 && alt=='face-up') {
-        // Se houver menos de 2 cartas, adiciona a nova carta
-        const cardElement = document.createElement('img')
-        cardElement.src = cardSrc
-        cardElement.id = 'card2'
-        cardElement.alt = "card2-in-duel"
-        cardElement.setAttribute("data-atk", atk)
-        cardElement.setAttribute("data-def", def)
-        cardElement.setAttribute("data-deck", deck)
-        if (width < 451) {
-            cardElement.style.width = '4.5em'
-            cardElement.style.height = '8em'
-        } else if (width < 1081 && height < 450) {
-            cardElement.style.width = '7em'
-            cardElement.style.height = '8.5em'
-        } else if (width < 1081) {
-            cardElement.style.width = '10.5em'
-            cardElement.style.height = '14em'
-        } else if (width < 1451 && height < 571) {
-            cardElement.style.width = '10.5em'
-            cardElement.style.height = '13.5em'
-        } else if (width < 1451 && height < 756) {
-            cardElement.style.width = '10.5em'
-            cardElement.style.height = '15.5em'
-        } else {
-            cardElement.style.width = '15em'
-            cardElement.style.height = '20em'
-        }
-        // Adiciona a carda à área de duelo
-        duelAreaCard2.appendChild(cardElement)
-        // Desabilita o deck superior
-        disableDeck('top-deck')
-        // Habilita o deck inferior
-        disableDeck('bottom-deck')
+        // Renderiza a carta na área de duelo, desabilita o deck superior e habilita o deck inferior
+        return (renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1'),
+                disableDeck('top-deck'),
+                enableDeck('bottom-deck'))
+    } else if (amountCards < 3 && alt=='face-up') { // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
+        // Renderiza a segunda carta na área de duelo e desabilita os dois decks
+        return (renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card2'),
+                disableDeck('top-deck'),
+                disableDeck('bottom-deck'))
     }
 }
 
-// Função para criar uma imagem
-const createPreview = (card) => {
+// Renderiza uma carta numa área de duelo
+const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, cardNum) => {
+    const cardElement = document.createElement('img')
+    cardElement.src = cardSrc
+    cardElement.id = cardNum
+    cardElement.alt = "card1-in-duel"
+    cardElement.setAttribute("data-atk", atk)
+    cardElement.setAttribute("data-def", def)
+    cardElement.setAttribute("data-deck", deck)
+
+    // Verifica se a tela é menor que 451px
+    if (width < 451) {
+        cardElement.style.width = '4.5em'
+        cardElement.style.height = '8em'
+    // Verifica se a largura da tela é menor que 1081px e se a altura é menor que 450px
+    } else if (width < 1081 && height < 450) {
+        cardElement.style.width = '7em'
+        cardElement.style.height = '8.5em'
+    // Verifica se a largura da tela é menor que 1081px
+    } else if (width < 1081) {
+        cardElement.style.width = '10.5em'
+        cardElement.style.height = '14em'
+    // Verifica se a largura da é menor que 1451px e se a altura é menor que 571px
+    } else if (width < 1451 && height < 571) {
+        cardElement.style.width = '10.5em'
+        cardElement.style.height = '13.5em'
+    // Verifica se a largura da é menor que 1451px e se a altura é menor que 756px
+    } else if (width < 1451 && height < 756) {
+        cardElement.style.width = '10.5em'
+        cardElement.style.height = '15.5em'
+    // Caso não seja nenhum dos casos anteriores
+    } else {
+        cardElement.style.width = '15em'
+        cardElement.style.height = '20em'
+    }
+
+    return duelAreaCard.appendChild(cardElement)
+}
+
+// Função para criar uma imagem para área de pré-visualização
+const createPreviewCard = (card) => {
     const cardPreviewSide = card.getAttribute('data-deck')
     const cardPreviewSrc = card.getAttribute('src')
     const topArea = document.getElementById('card1-preview')
     const bottomArea = document.getElementById('card2-preview')
-    if (topArea.querySelector('img')) clearPreviewArea(topArea)
-    if (bottomArea.querySelector('img')) clearPreviewArea(bottomArea)
+    clearPreviewArea()
     const cardCopia = document.createElement('img')
     cardCopia.src = cardPreviewSrc
     cardCopia.alt = "card-preview"
@@ -159,8 +140,11 @@ const createPreview = (card) => {
 }
 
 // Função para limpar a área de pré-visualização
-const clearPreviewArea = (area) => {
-    area.querySelector('img').remove()
+const clearPreviewArea = () => {
+    const topArea = document.getElementById('card1-preview')
+    const bottomArea = document.getElementById('card2-preview')
+    if (topArea.querySelector('img')) topArea.querySelector('img').remove()
+    if (bottomArea.querySelector('img')) bottomArea.querySelector('img').remove()
 }
 
 // Função para habilitar o deck
@@ -193,68 +177,85 @@ const duelButtonEvent = () => {
     const atkCard1 = card1.getAttribute('data-atk')
     const defCard2 = card2.getAttribute('data-def')
     const deckCard1 = card1.getAttribute('data-deck')
-    duelDamage(atkCard1, defCard2, deckCard1)
-    cleanDuelArea()
-    disableDuelButtonEvent('player1-duel-button')
-    enableDuelButtonEvent('player2-duel-button')
-    renderCards(topDeckCards, "top-deck")
-    renderCards(bottomDeckCards, "bottom-deck")
-    otherRound('bottom-deck')
+    return (duelDamage(atkCard1, defCard2, 'top'),
+            clearDuelArea(),
+            disableDuelButtonEvent('player1-duel-button'),
+            enableDuelButtonEvent('player2-duel-button'),
+            renderCards(topDeckCards, "top-deck"),
+            renderCards(bottomDeckCards, "bottom-deck"),
+            otherRound('bottom-deck'))
 }
 
 // Função que calcula o dano (4º)
 const duelDamage = (atk, def, deckCard1) => {
     if (deckCard1 == 'top') {
         if ((atk-def) > 0) {
-            return applyDamageToPlayer2LifeBar((Number(player2LifeAmount.textContent)-(atk-def))/100, player2LifeAmount)
+            return applyDamageToPlayer((Number(player2LifeAmount.textContent)-(atk-def))/100, player2LifeAmount, player2LifeBar, 'PLAYER 1', 'top-deck')
         }
     } else {
         if ((atk-def) > 0) {
-            return applyDamageToPlayer1LifeBar((Number(player1LifeAmount.textContent)-(atk-def))/100, player1LifeAmount)
+            return applyDamageToPlayer((Number(player1LifeAmount.textContent)-(atk-def))/100, player1LifeAmount, player1LifeBar, 'PLAYER 2', 'bottom-deck')
         }
     }
 }
 
 // Função que aplica o dano a barra de vida (5º)
-const applyDamageToPlayer1LifeBar = (damage, div) => {
-    player1LifeBar.style.width = damage+"%"
+const applyDamageToPlayer = (damage, div, lifeBarPlayer, nameWinner, deckBlocked) => {
+    lifeBarPlayer.style.width = damage+"%"
     div.textContent -= Number(div.textContent)-(damage*100)
     if (div.textContent <= 0) {
-        resultScreen.style.display = 'block'
-        document.getElementById('winner').innerText = 'PLAYER 2'
-        document.getElementById('right').style.filter = 'brightness(20%)'
-        document.getElementById('left').style.filter = 'brightness(20%)'
-        restartButton.addEventListener('click', restartGame)
+        // Limpa a área de pré-visualização
+        clearPreviewArea()
+        // Chama a condição de vitória
+        winScreen(nameWinner, deckBlocked)
     }
 }
 
-// Função que aplica o dano a barra de vida (5º)
-const applyDamageToPlayer2LifeBar = (damage, div) => {
-    player2LifeBar.style.width = damage+"%"
-    div.textContent -= Number(div.textContent)-(damage*100)
-    if (div.textContent <= 0) {
-        resultScreen.style.display = 'block'
-        document.getElementById('winner').innerText = 'PLAYER 1'
-        document.getElementById('right').style.filter = 'brightness(20%)'
-        document.getElementById('left').style.filter = 'brightness(20%)'
-        restartButton.addEventListener('click', restartGame)
-    }
+// Função que cria a tela de vitória
+const winScreen = (nameWinner, deckBlocked) => {
+    // Torna visivel a tela de vitória
+    resultScreen.style.display = 'block'
+    // Escreve o player vencedor na tela
+    document.getElementById('winner').innerText = nameWinner
+    // Diminui o brilho dos elementos atrás da tela de vitória
+    document.getElementById('right').style.filter = 'brightness(20%)'
+    document.getElementById('left').style.filter = 'brightness(20%)'
+    // Evento de click no botão de continuar, para reiniciar o game
+    restartButton.addEventListener('click', () => {
+        document.getElementById('right').style.filter = 'brightness(100%)'
+        document.getElementById('left').style.filter = 'brightness(100%)'
+        resultScreen.style.display = 'none'
+        player1LifeAmount.textContent = 100
+        player1LifeBar.style.width = 100+"%"
+        player2LifeAmount.textContent = 100
+        player2LifeBar.style.width = 100+"%"
+        playAgain(deckBlocked)
+    })
 }
 
-// Função que reinicia os valores da vida
-const restartGame = () => {
-    document.getElementById('right').style.filter = 'brightness(100%)'
-    document.getElementById('left').style.filter = 'brightness(100%)'
-    resultScreen.style.display = 'none'
-    player1LifeAmount.textContent = 100
-    player1LifeBar.style.width = 100+"%"
-    player2LifeAmount.textContent = 100
-    player2LifeBar.style.width = 100+"%"
-    anotherRound('top-deck')
+// Função para jogar novamente
+const playAgain = (deckBlocked) => {
+    // Verifica se o deck a ser bloqueado é o superior
+    if (deckBlocked == 'top-deck') {
+        // Habilita o deck inferior
+        enableDeck('bottom-deck')
+        disableDeck(deckBlocked)
+        // Adicionando o evento de click ao container que contém o deck inferior
+        document.getElementById('bottom-deck').addEventListener('click', infoValues)
+        document.getElementById('bottom-deck').addEventListener('click', handleFlipClick)
+    } else { // Caso seja o deck inferior a ser bloqueado
+        // Habilita o deck superior 
+        enableDeck('top-deck')
+        // Desabilita o deck inferior
+        disableDeck('bottom-deck')
+        // Adicionando o evento de click ao container que contém o deck superior
+        document.getElementById('top-deck').addEventListener('click', infoValues)
+        document.getElementById('top-deck').addEventListener('click', handleFlipClick)
+    }
 }
 
 // Função que limpa a area de duelo (6º)
-const cleanDuelArea = () => {
+const clearDuelArea = () => {
     document.getElementById('card1').remove()
     document.getElementById('card2').remove()
 }
@@ -299,13 +300,13 @@ const otherDuelButtonEvent = () => {
     const card2 = document.getElementById('card2')
     const atkCard1 = card1.getAttribute('data-atk')
     const defCard2 = card2.getAttribute('data-def')
-    duelDamage(atkCard1, defCard2)
-    cleanDuelArea()
-    enableDuelButtonEvent('player1-duel-button')
-    disableDuelButtonEvent('player2-duel-button')
-    renderCards(topDeckCards, "top-deck")
-    renderCards(bottomDeckCards, "bottom-deck")
-    anotherRound('top-deck')
+    return (duelDamage(atkCard1, defCard2, 'bottom'),
+            clearDuelArea(),
+            enableDuelButtonEvent('player1-duel-button'),
+            disableDuelButtonEvent('player2-duel-button'),
+            renderCards(topDeckCards, "top-deck"),
+            renderCards(bottomDeckCards, "bottom-deck"),
+            anotherRound('top-deck'))
 }
 
 // Função para fazer o deck superior começar jogando (11º)
@@ -340,6 +341,7 @@ const stopMusic = () => {
     music.pause()
 }
 
+// Toca a musica de fundo
 backgroundMusic()
 
 // Adicionando o evento de click para mutar ou desmutar a musica
@@ -350,5 +352,5 @@ document.getElementById('music-play').addEventListener('click', backgroundMusic)
 document.getElementById('top-deck').addEventListener('click', infoValues)
 document.getElementById('top-deck').addEventListener('click', handleFlipClick)
 
-// Evento de click no botão
+// Evento de click no botão de duelo
 document.getElementById('player1-duel-button').addEventListener('click', duelButtonEvent)
