@@ -25,19 +25,19 @@ const renderCards = (cards, containerId) => {
 
 // Armazenando as URL's das cartas
 const topDeckCards = [
-    {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400, deck: 'top', position: 1},
-    {url: "imgs/DarkMagicianGirl.jpg", atk: 2000, def: 1700, deck: 'top', position: 2},
-    {url: "imgs/SummonedSkull.jpg", atk: 2500, def: 1200, deck: 'top', position: 3},
-    {url: "imgs/Kuriboh.jpg", atk: 300, def: 200, deck: 'top', position: 4},
-    {url: "imgs/BlackLusterSoldier.jpg", atk: 3000, def: 2500, deck: 'top', position: 5}
+    {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400, deck: 'top'},
+    {url: "imgs/DarkMagicianGirl.jpg", atk: 2000, def: 1700, deck: 'top'},
+    {url: "imgs/SummonedSkull.jpg", atk: 2500, def: 1200, deck: 'top'},
+    {url: "imgs/Kuriboh.jpg", atk: 300, def: 200, deck: 'top'},
+    {url: "imgs/BlackLusterSoldier.jpg", atk: 3000, def: 2500, deck: 'top'}
 ]
 
 const bottomDeckCards = [
-    {url: "imgs/LusterDragon.jpg", atk: 2400, def: 1400, deck: 'bottom', position: 6},
-    {url: "imgs/BlueEyesWhiteDragon.jpg", atk: 3000, def: 2500, deck: 'bottom', position: 7},
-    {url: "imgs/ObeliskTheTormentor.jpg", atk: 4000, def: 4000, deck: 'bottom', position: 8},
-    {url: "imgs/RedEyesBlackDragon.jpg", atk: 2400, def: 2000, deck: 'bottom', position: 9},
-    {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom', position: 10}
+    {url: "imgs/LusterDragon.jpg", atk: 2400, def: 1400, deck: 'bottom'},
+    {url: "imgs/BlueEyesWhiteDragon.jpg", atk: 3000, def: 2500, deck: 'bottom'},
+    {url: "imgs/ObeliskTheTormentor.jpg", atk: 4000, def: 4000, deck: 'bottom'},
+    {url: "imgs/RedEyesBlackDragon.jpg", atk: 2400, def: 2000, deck: 'bottom'},
+    {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom'}
 ]
 
 // Renderiza as cartas na tela

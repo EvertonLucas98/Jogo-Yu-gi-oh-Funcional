@@ -71,14 +71,24 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     if (amountCards < 2 && alt=='face-up') {
         // Renderiza a carta na área de duelo, desabilita o deck superior e habilita o deck inferior
         return (renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1'),
-                disableDeck('top-deck'),
-                enableDeck('bottom-deck'))
+                computerDuelCard(duelAreaCard2, width, height, 'card2'),
+                disableDeck('top-deck'))
     } else if (amountCards < 3 && alt=='face-up') { // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
         // Renderiza a segunda carta na área de duelo e desabilita os dois decks
         return (renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card2'),
                 disableDeck('top-deck'),
-                disableDeck('bottom-deck'))
+                disableDeck('bottom-deck'),
+                console.log(deck),
+                duelDamageComputer(atk, def))
     }
+}
+
+const computerDuelCard = (duelArea, width, height, cardNum) => {
+    const src = bottomDeckCards[4].url
+    const atk = bottomDeckCards[4].atk
+    const def = bottomDeckCards[4].def
+    const deck = bottomDeckCards[4].deck
+    renderDuelCards(duelArea, width, height, src, atk, def, deck, cardNum)
 }
 
 // Renderiza uma carta numa área de duelo
@@ -179,23 +189,33 @@ const duelButtonEvent = () => {
     const deckCard1 = card1.getAttribute('data-deck')
     return (duelDamage(atkCard1, defCard2, 'top'),
             clearDuelArea(),
-            disableDuelButtonEvent('player1-duel-button'),
-            enableDuelButtonEvent('player2-duel-button'),
             renderCards(topDeckCards, "top-deck"),
             renderCards(bottomDeckCards, "bottom-deck"),
-            otherRound('bottom-deck'))
+            otherRound('top-deck'))
 }
 
 // Função que calcula o dano (4º)
-const duelDamage = (atk, def, deckCard1) => {
-    if (deckCard1 == 'top') {
-        if ((atk-def) > 0) {
-            return applyDamageToPlayer((Number(player2LifeAmount.textContent)-(atk-def))/100, player2LifeAmount, player2LifeBar, 'PLAYER 1', 'top-deck')
-        }
-    } else {
-        if ((atk-def) > 0) {
-            return applyDamageToPlayer((Number(player1LifeAmount.textContent)-(atk-def))/100, player1LifeAmount, player1LifeBar, 'PLAYER 2', 'bottom-deck')
-        }
+const duelDamage = (atk, def) => {
+    if ((atk-def) > 0) {
+        console.log(player2LifeAmount.textContent)
+        console.log(atk-def)
+        console.log((Number(player2LifeAmount.textContent)-(atk-def)))
+        console.log((Number(player2LifeAmount.textContent)-(atk-def))/100)
+        return applyDamageToPlayer((Number(player2LifeAmount.textContent)-(atk-def))/100,
+                                    player2LifeAmount,
+                                    player2LifeBar,
+                                    'PLAYER 1',
+                                    'top-deck')
+    }
+}
+
+const duelDamageComputer = (atk, def) => {
+    if ((atk-def) > 0) {
+        return applyDamageToPlayer((Number(player1LifeAmount.textContent)-(atk-def))/100,
+                                    player1LifeAmount,
+                                    player1LifeBar,
+                                    'PLAYER 2',
+                                    'bottom-deck')
     }
 }
 
@@ -262,6 +282,10 @@ const clearDuelArea = () => {
 
 // Função para fazer o deck inferior começar jogando (7º)
 const otherRound = (containerId) => {
+    const duelAreaCard1 = document.querySelector('.duel-card-1')
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    computerDuelCard(duelAreaCard1, width, height, 'card2')
     enableDeck(containerId)
     document.getElementById(containerId).addEventListener('click', otherInfoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
@@ -294,39 +318,12 @@ const otherAddToDuelArea = (alt) => {
     }
 }
 
-// Função para o evento de click no botão de atacar do player 2 (10º)
-const otherDuelButtonEvent = () => {
-    const card1 = document.getElementById('card1')
-    const card2 = document.getElementById('card2')
-    const atkCard1 = card1.getAttribute('data-atk')
-    const defCard2 = card2.getAttribute('data-def')
-    return (duelDamage(atkCard1, defCard2, 'bottom'),
-            clearDuelArea(),
-            enableDuelButtonEvent('player1-duel-button'),
-            disableDuelButtonEvent('player2-duel-button'),
-            renderCards(topDeckCards, "top-deck"),
-            renderCards(bottomDeckCards, "bottom-deck"),
-            anotherRound('top-deck'))
-}
 
 // Função para fazer o deck superior começar jogando (11º)
 const anotherRound = (containerId) => {
     enableDeck(containerId)
     document.getElementById(containerId).addEventListener('click', infoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
-}
-
-// Função para habilitar os botões
-const enableDuelButtonEvent = (containerId) => {
-    const container = document.getElementById(containerId)
-    container.style.pointerEvents = 'auto'
-    document.getElementById('player2-duel-button').addEventListener('click', otherDuelButtonEvent)
-}
-
-// Função que desabilita o botão de ataque do player 1
-const disableDuelButtonEvent = (containerId) => {
-    const container = document.getElementById(containerId)
-    container.style.pointerEvents = 'none'
 }
 
 // Função que da play na musica do duelo
