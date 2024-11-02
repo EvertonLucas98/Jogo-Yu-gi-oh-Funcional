@@ -190,19 +190,32 @@ const duelButtonEvent = () => {
 const duelDamage = (atk, def, deckCard1) => {
     if (deckCard1 == 'top') {
         if ((atk-def) > 0) {
-            return applyDamageToPlayer((Number(player2LifeAmount.textContent)-(atk-def))/100, player2LifeAmount, player2LifeBar, 'PLAYER 1', 'top-deck')
+            console.log(player2LifeAmount.textContent)
+            console.log(atk-def)
+            console.log((Number(player2LifeAmount.textContent)-(atk-def)))
+            return applyDamageToPlayer( (Number(player2LifeAmount.textContent)-(atk-def)),
+                                        (atk-def),
+                                        player2LifeAmount,
+                                        player2LifeBar,
+                                        'PLAYER 1',
+                                        'top-deck')
         }
     } else {
         if ((atk-def) > 0) {
-            return applyDamageToPlayer((Number(player1LifeAmount.textContent)-(atk-def))/100, player1LifeAmount, player1LifeBar, 'PLAYER 2', 'bottom-deck')
+            return applyDamageToPlayer( (Number(player1LifeAmount.textContent)-(atk-def)),
+                                        (atk-def),
+                                        player1LifeAmount,
+                                        player1LifeBar,
+                                        'PLAYER 2',
+                                        'bottom-deck')
         }
     }
 }
 
 // Função que aplica o dano a barra de vida (5º)
-const applyDamageToPlayer = (damage, div, lifeBarPlayer, nameWinner, deckBlocked) => {
-    lifeBarPlayer.style.width = damage+"%"
-    div.textContent -= Number(div.textContent)-(damage*100)
+const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner, deckBlocked) => {
+    lifeBarPlayer.style.width = ((damage*100)/Number(div.textContent))+"%"
+    div.textContent -= restOfLife
     if (div.textContent <= 0) {
         // Limpa a área de pré-visualização
         clearPreviewArea()

@@ -7,4 +7,4 @@ Passos:
 			Tela da introdução  [20%]
 
 Bugs:
-	Bug do restart ["RESOLVIDO!"]
+	Bug no modo contra o computador: A carta que defente ta dando dano no proprio player e depois faz o que tem que ser feito corretamente.

@@ -32,6 +32,16 @@ html, body {
     80% {opacity: 1;}
 }
 
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60em;
+    height: 30em;
+    padding-top: 6em;
+}
+
 .button {
     font-family: "Press Start 2P", system-ui;
     font-weight: 400;

@@ -78,7 +78,6 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
         return (renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card2'),
                 disableDeck('top-deck'),
                 disableDeck('bottom-deck'),
-                console.log(deck),
                 duelDamageComputer(atk, def))
     }
 }
@@ -197,11 +196,8 @@ const duelButtonEvent = () => {
 // Função que calcula o dano (4º)
 const duelDamage = (atk, def) => {
     if ((atk-def) > 0) {
-        console.log(player2LifeAmount.textContent)
-        console.log(atk-def)
-        console.log((Number(player2LifeAmount.textContent)-(atk-def)))
-        console.log((Number(player2LifeAmount.textContent)-(atk-def))/100)
-        return applyDamageToPlayer((Number(player2LifeAmount.textContent)-(atk-def))/100,
+        return applyDamageToPlayer( (Number(player2LifeAmount.textContent)-(atk-def)),
+                                    (atk-def),
                                     player2LifeAmount,
                                     player2LifeBar,
                                     'PLAYER 1',
@@ -211,7 +207,13 @@ const duelDamage = (atk, def) => {
 
 const duelDamageComputer = (atk, def) => {
     if ((atk-def) > 0) {
-        return applyDamageToPlayer((Number(player1LifeAmount.textContent)-(atk-def))/100,
+        console.log(atk)
+        console.log(def)
+        console.log((Number(player1LifeAmount.textContent)))
+        console.log((atk-def))
+        console.log((Number(player1LifeAmount.textContent)-(atk-def)))
+        return applyDamageToPlayer( (Number(player1LifeAmount.textContent)-(atk-def)),
+                                    (atk-def),
                                     player1LifeAmount,
                                     player1LifeBar,
                                     'PLAYER 2',
@@ -220,9 +222,9 @@ const duelDamageComputer = (atk, def) => {
 }
 
 // Função que aplica o dano a barra de vida (5º)
-const applyDamageToPlayer = (damage, div, lifeBarPlayer, nameWinner, deckBlocked) => {
-    lifeBarPlayer.style.width = damage+"%"
-    div.textContent -= Number(div.textContent)-(damage*100)
+const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner, deckBlocked) => {
+    lifeBarPlayer.style.width = ((damage*100)/Number(div.textContent))+"%"
+    div.textContent -= restOfLife
     if (div.textContent <= 0) {
         // Limpa a área de pré-visualização
         clearPreviewArea()
@@ -293,31 +295,30 @@ const otherRound = (containerId) => {
 
 // Função para pegar o atributo alt da imagem (8º)
 const otherInfoValues = (event) => {
+    const div = document.querySelector('.duel-card-1')
+    const imgDiv = div.querySelector('img')
+    const atk = imgDiv.getAttribute('data-atk')
     const img = event.target
     const alt = img.getAttribute('alt')
+    const def = img.getAttribute('data-def')
     // Adiciona a carta à área de duelo
-    otherAddToDuelArea(alt)
+    otherAddToDuelArea(alt, atk, def)
 }
 
 // Função que adiciona a carta à área de duelo (9º)
-const otherAddToDuelArea = (alt) => {
+const otherAddToDuelArea = (alt, atk, def) => {
     const duelArea = document.querySelector('.duel')
     const amountCards = duelArea.querySelectorAll('img')
-
+    
     // Verifica quantas cartas já estão na área de duelo
-    if (amountCards.length <= 2 && alt=='face-up') {
-        // Desabilita o deck inferior
-        disableDeck('bottom-deck')
-        // Habilita o deck superior
-        enableDeck('top-deck')
-    } else if (amountCards.length < 3 && alt=='face-up') {
+    if (alt == 'face-up') {
         // Desabilita o deck superior
         disableDeck('top-deck')
-        // Habilita o deck inferior
+        // Desabilita o deck inferior
         disableDeck('bottom-deck')
+        duelDamageComputer(atk, def)
     }
 }
-
 
 // Função para fazer o deck superior começar jogando (11º)
 const anotherRound = (containerId) => {
