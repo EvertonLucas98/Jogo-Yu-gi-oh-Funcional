@@ -67,8 +67,9 @@ const infoValues = (event) => {
     const deck = img.getAttribute('data-deck')
     // Armazena as informações do container do deck da carta
     const containerCard = event.target.closest('.flip-card')
-    // 
+    // Armazena o primeiro filho do container do deck da carta
     const childContainerCard = containerCard.querySelectorAll('div')[1]
+    // Armazena a carta do primeiro filho do container do deck
     const card = childContainerCard.querySelector('img')
     // Adiciona a carta à área de duelo e à área de pré-visualização
     return (addToDuelArea(img.src, alt, atk, def, deck), createPreviewCard(card))
@@ -76,6 +77,7 @@ const infoValues = (event) => {
 
 // Função que adiciona a carta à área de duelo (2º)
 const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
+    // Armazena as informações da ÁREA DE DUELO
     const duelArea = document.querySelector('.duel')
     const duelAreaCard1 = document.querySelector('.duel-card-1')
     const duelAreaCard2 = document.querySelector('.duel-card-2')
@@ -85,14 +87,11 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
 
     // Verifica se já existe uma carta virada para cima na área de duelo e adiciona a carta selecionada
     if (amountCards < 2 && alt=='face-up') {
-        console.log('addToDuelArea 01')
         // Renderiza a carta na área de duelo, desabilita o deck superior e habilita o deck inferior
         renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1')
         computerDuelCard(duelAreaCard2, width, height, 'card2', randomNumber(0, 4))
         disableDeck('top-deck')
     } else if (amountCards < 3 && alt=='face-up') { // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
-        console.log('addToDuelArea 02')
-        console.log(atk, def)
         // Renderiza a segunda carta na área de duelo e desabilita os dois decks
         renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card1')
         infoDuelValues(duelAreaCard1, duelAreaCard2)
@@ -234,8 +233,7 @@ const duelDamage = (atk, def) => {
                                     (atk-def),
                                     player2LifeAmount,
                                     player2LifeBar,
-                                    'PLAYER 1',
-                                    'top-deck')
+                                    'PLAYER 1')
     }
 }
 
@@ -245,25 +243,24 @@ const duelDamageComputer = (atk, def) => {
                                     (atk-def),
                                     player1LifeAmount,
                                     player1LifeBar,
-                                    'PLAYER 2',
-                                    'bottom-deck')
+                                    'PLAYER 2')
     }
 }
 
 // Função que aplica o dano a barra de vida (5º)
-const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner, deckBlocked) => {
+const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner) => {
     lifeBarPlayer.style.width = ((damage*100)/Number(div.textContent))+"%"
     div.textContent -= restOfLife
     if (div.textContent <= 0) {
         // Limpa a área de pré-visualização
         clearPreviewArea()
         // Chama a condição de vitória
-        winScreen(nameWinner, deckBlocked)
+        winScreen(nameWinner)
     }
 }
 
 // Função que cria a tela de vitória
-const winScreen = (nameWinner, deckBlocked) => {
+const winScreen = (nameWinner) => {
     // Torna visivel a tela de vitória
     resultScreen.style.display = 'block'
     // Escreve o player vencedor na tela
@@ -280,29 +277,19 @@ const winScreen = (nameWinner, deckBlocked) => {
         player1LifeBar.style.width = 100+"%"
         player2LifeAmount.textContent = 100
         player2LifeBar.style.width = 100+"%"
-        playAgain(deckBlocked)
+        playAgain()
     })
 }
 
 // Função para jogar novamente
-const playAgain = (deckBlocked) => {
-    // Verifica se o deck a ser bloqueado é o superior
-    if (deckBlocked == 'top-deck') {
-        // Habilita o deck inferior
-        enableDeck('bottom-deck')
-        disableDeck(deckBlocked)
-        // Adicionando o evento de click ao container que contém o deck inferior
-        document.getElementById('bottom-deck').addEventListener('click', infoValues)
-        document.getElementById('bottom-deck').addEventListener('click', handleFlipClick)
-    } else { // Caso seja o deck inferior a ser bloqueado
-        // Habilita o deck superior 
-        enableDeck('top-deck')
-        // Desabilita o deck inferior
-        disableDeck('bottom-deck')
-        // Adicionando o evento de click ao container que contém o deck superior
-        document.getElementById('top-deck').addEventListener('click', infoValues)
-        document.getElementById('top-deck').addEventListener('click', handleFlipClick)
-    }
+const playAgain = () => {
+    // Habilita o deck superior 
+    enableDeck('top-deck')
+    // Desabilita o deck inferior
+    disableDeck('bottom-deck')
+    // Adicionando o evento de click ao container que contém o deck superior
+    document.getElementById('top-deck').addEventListener('click', infoValues)
+    document.getElementById('top-deck').addEventListener('click', handleFlipClick)
 }
 
 // Função que limpa a area de duelo (6º)
@@ -313,7 +300,6 @@ const clearDuelArea = () => {
 
 // Função para fazer o deck inferior começar jogando (7º)
 const otherRound = (containerId) => {
-    console.log('otherRound')
     const duelAreaCard1 = document.querySelector('.duel-card-1')
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -322,7 +308,6 @@ const otherRound = (containerId) => {
     document.getElementById(containerId).addEventListener('click', infoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
-
 
 // Função para fazer o deck superior começar jogando (11º)
 const anotherRound = (containerId) => {
