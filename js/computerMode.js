@@ -69,16 +69,17 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
 
     // Verifica se já existe uma carta virada para cima na área de duelo e adiciona a carta selecionada
     if (amountCards < 2 && alt=='face-up') {
+        console.log('addToDuelArea 01')
         // Renderiza a carta na área de duelo, desabilita o deck superior e habilita o deck inferior
-        return (renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1'),
-                computerDuelCard(duelAreaCard2, width, height, 'card2'),
-                disableDeck('top-deck'))
+        renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1')
+        computerDuelCard(duelAreaCard2, width, height, 'card2')
+        disableDeck('top-deck')
     } else if (amountCards < 3 && alt=='face-up') { // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
+        console.log('addToDuelArea 02')
         // Renderiza a segunda carta na área de duelo e desabilita os dois decks
-        return (renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card2'),
-                disableDeck('top-deck'),
-                disableDeck('bottom-deck'),
-                duelDamageComputer(atk, def))
+        renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card1')
+        duelDamageComputer(atk, def)
+        clearDuelArea()
     }
 }
 
@@ -126,7 +127,7 @@ const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, c
         cardElement.style.height = '20em'
     }
 
-    return duelAreaCard.appendChild(cardElement)
+    duelAreaCard.appendChild(cardElement)
 }
 
 // Função para criar uma imagem para área de pré-visualização
@@ -207,11 +208,6 @@ const duelDamage = (atk, def) => {
 
 const duelDamageComputer = (atk, def) => {
     if ((atk-def) > 0) {
-        console.log(atk)
-        console.log(def)
-        console.log((Number(player1LifeAmount.textContent)))
-        console.log((atk-def))
-        console.log((Number(player1LifeAmount.textContent)-(atk-def)))
         return applyDamageToPlayer( (Number(player1LifeAmount.textContent)-(atk-def)),
                                     (atk-def),
                                     player1LifeAmount,
@@ -309,9 +305,10 @@ const otherInfoValues = (event) => {
 const otherAddToDuelArea = (alt, atk, def) => {
     const duelArea = document.querySelector('.duel')
     const amountCards = duelArea.querySelectorAll('img')
+    console.log('otherAddToDuelArea')
     
     // Verifica quantas cartas já estão na área de duelo
-    if (alt == 'face-up') {
+    if (amountCards < 2 && alt == 'face-up') {
         // Desabilita o deck superior
         disableDeck('top-deck')
         // Desabilita o deck inferior
