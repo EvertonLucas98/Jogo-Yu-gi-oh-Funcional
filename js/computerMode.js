@@ -303,7 +303,7 @@ const duelDamageComputer = (atk, def) => {
 // Função que aplica o dano a barra de vida
 const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner) => {
     // Altera o estilo da barra de vida de acordo com a porcentagem que é equivalente ao dano
-    lifeBarPlayer.style.width = ((damage*100)/Number(div.textContent))+"%"
+    lifeBarPlayer.style.width = ((damage*100)/5000)+"%"
     // Altera o valor contido na div que representa numericamente a quantidade de vida
     div.textContent -= restOfLife
 
