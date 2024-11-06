@@ -1,10 +1,12 @@
 Passos:
 	"Back-end":
-		Modo para jogar contra o computador
+		Modo para jogar contra o computador [FEITO!]
+		Mudar a estrutura de if's e else's da função renderDuelCards um switch
 	"Front-end":
-		Tornar o game mais responsivo
-			Tela do index       [20%]
-			Tela da introdução  [20%]
+		Tornar o game mais responsivo	[80%]
+			Tela do index       [80%]
+			Tela da introdução  [80%]
+			Tela do game		[80%]
 
 Bugs:
-	Bug no modo contra o computador: A carta que defente ta dando dano no proprio player e depois faz o que tem que ser feito corretamente.
+	Bug no modo contra o computador: A carta que defente ta dando dano no proprio player e depois faz o que tem que ser feito corretamente.	[CORRIGIDO!]
