@@ -146,8 +146,8 @@ const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, c
         cardElement.style.height = '8.5em'
     // Se a largura da tela é menor que 1081px
     } else if (width < 1081) {
-        cardElement.style.width = '10.5em'
-        cardElement.style.height = '14em'
+        cardElement.style.width = '12em'
+        cardElement.style.height = '18em'
     // Se a largura da é menor que 1451px e se a altura é menor que 571px
     } else if (width < 1451 && height < 571) {
         cardElement.style.width = '10.5em'
@@ -168,6 +168,10 @@ const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, c
 
 // Função para criar uma imagem para área de pré-visualização
 const createPreviewCard = (card) => {
+    // Armazena a LARGURA da tela
+    const width = window.innerWidth;
+    // Armazena o COMPRIMENTO da tela
+    const height = window.innerHeight;
     // Armazena o atributo DATA-DECK da carta
     const cardPreviewSide = card.getAttribute('data-deck')
     // Armazena o atributo SRC da carta
@@ -184,10 +188,17 @@ const createPreviewCard = (card) => {
     cardCopia.src = cardPreviewSrc
     // Adiciona o atributo ALT
     cardCopia.alt = "card-preview"
-    // Adiciona um estilo para a LARGURA
-    cardCopia.style.width = '70%'
-    // Adiciona um estilo para o COMPRIMENTO
-    cardCopia.style.height = '100%'
+    if (width < 1081) {
+        // Adiciona um estilo para a LARGURA
+        cardCopia.style.width = '98%'
+        // Adiciona um estilo para o COMPRIMENTO
+        cardCopia.style.height = '100%'
+    } else {
+        // Adiciona um estilo para a LARGURA
+        cardCopia.style.width = '70%'
+        // Adiciona um estilo para o COMPRIMENTO
+        cardCopia.style.height = '100%'
+    }
 
     // Se a carta pertencer ao deck superior
     if (cardPreviewSide == 'top') {
