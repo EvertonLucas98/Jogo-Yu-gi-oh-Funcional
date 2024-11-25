@@ -1,11 +1,17 @@
+// Armazena o elemento presente no HTML referente a QUANTIDADE NUMÉRICA de vida do PLAYER 1
 const player1LifeAmount = document.getElementById('player1-Life-Amount')
+// Armazena o elemento presente no HTML referente a QUANTIDADE NUMÉRICA de vida do PLAYER 2
 const player2LifeAmount = document.getElementById('player2-Life-Amount')
+// Armazena o elemento presente no HTML referente a REPRESENTAÇÃO VISUAL da vida do PLAYER 1
 const player1LifeBar = document.getElementById('player1-health')
+// Armazena o elemento presente no HTML referente a REPRESENTAÇÃO VISUAL da vida do PLAYER 2
 const player2LifeBar = document.getElementById('player2-health')
+// Armazena o elemento presente no HTML referente ao RESULTADO FINAL da partida
 const resultScreen = document.getElementById('result-screen')
+// Armazena o elemento presente no HTML referente ao BOTÃO DE REESTART
 const restartButton = document.getElementById('restart-button')
 
-// Cria os elementos que serão plotados no html
+// Cria as cartas que serão plotadas no html
 const createCard = (frontUrl, atk, def, deck, position, backUrl='imgs/Down.jpg') => `
     <div class="flip-card">
         <div class="flip-card-front">
@@ -17,13 +23,15 @@ const createCard = (frontUrl, atk, def, deck, position, backUrl='imgs/Down.jpg')
     </div>
 `
 
-// Função que renderiza as cartas num container
+// Função que renderiza as cartas num determinado container
 const renderCards = (cards, containerId) => {
+    // Armazena o elemento presente no HTML referente ao parâmetro passado
     const container = document.getElementById(containerId)
+    // Plota no container informado as cartas com as características presentes dentro de cada registro que estarão dentro do array cards
     container.innerHTML = cards.map(card => createCard(card.url, card.atk, card.def, card.deck)).join('')
 }
 
-// Armazenando as URL's das cartas
+// Armazenando as características das cartas do DECK SUPERIOR
 const topDeckCards = [
     {url: "imgs/DarkPaladin.jpg", atk: 2900, def: 2400, deck: 'top'},
     {url: "imgs/DarkMagicianGirl.jpg", atk: 2000, def: 1700, deck: 'top'},
@@ -32,6 +40,7 @@ const topDeckCards = [
     {url: "imgs/BlackLusterSoldier.jpg", atk: 3000, def: 2500, deck: 'top'}
 ]
 
+// Armazenando as características das cartas do DECK INFERIOR
 const bottomDeckCards = [
     {url: "imgs/LusterDragon.jpg", atk: 2400, def: 1400, deck: 'bottom'},
     {url: "imgs/BlueEyesWhiteDragon.jpg", atk: 3000, def: 2500, deck: 'bottom'},
@@ -40,46 +49,69 @@ const bottomDeckCards = [
     {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom'}
 ]
 
-// Renderiza as cartas na tela
+// Renderiza as cartas do DECK SUPERIOR
 renderCards(topDeckCards, "top-deck")
+// Renderiza as cartas do DECK INFERIOR
 renderCards(bottomDeckCards, "bottom-deck")
 
-// Função que obtém o valor os atributos das respectivas cartas (1º)
+// Função que obtém os atributos das cartas do deck superior que são clicadas
 const infoValues = (event) => {
+    // Armazena as informações da carta
     const img = event.target
+    // Armazena as informação do ATAQUE da carta
     const atk = img.getAttribute('data-atk')
+    // Armazena a informação da DEFESA da carta
     const def = img.getAttribute('data-def')
+    // Armazena a informação do ALT da carta
     const alt = img.getAttribute('alt')
+    // Armazena a informação do DECK da carta
     const deck = img.getAttribute('data-deck')
+    // Armazena as informações do CONTAINER do deck da carta
     const containerCard = event.target.closest('.flip-card')
+    // Armazena o PRIMEIRO FILHO do container do deck da carta
     const childContainerCard = containerCard.querySelectorAll('div')[1]
+    // Armazena A CARTA DO PRIMEIRO FILHO do container do deck
     const card = childContainerCard.querySelector('img')
-    // Adiciona a carta à área de duelo e à área de pré-visualização
-    return (addToDuelArea(img.src, alt, atk, def, deck), createPreviewCard(card))
+    // Adiciona a carta à área de pré-visualização
+    createPreviewCard(card)
+    // Adiciona a carta à área de duelo
+    addToDuelArea(img.src, alt, atk, def, deck)
 }
 
-// Função que adiciona a carta à área de duelo (2º)
+// Função que adiciona a carta à área de duelo
 const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
+    // Armazena as informações da ÁREA DE DUELO
     const duelArea = document.querySelector('.duel')
+    // Armazena as informações da PRIMEIRA carta da área de duelo
     const duelAreaCard1 = document.querySelector('.duel-card-1')
+    // Armazena as informações da SEGUNDA carta da área de duelo
     const duelAreaCard2 = document.querySelector('.duel-card-2')
+    // Armazena a QUANTIDADE de imagens existentes na área de duelo
     const amountCards = duelArea.querySelectorAll('img').length
+    // Armazena a LARGURA da tela
     const width = window.innerWidth;
+    // Armazena o COMPRIMENTO da tela
     const height = window.innerHeight;
 
-    // Verifica se já existe uma carta virada para cima na área de duelo e adiciona a carta selecionada
+    // Se não tiver NENHUMA carta na área de duelo e se a carta clicada está virada para cima
     if (amountCards < 2 && alt=='face-up') {
-        // Renderiza a carta na área de duelo, desabilita o deck superior e habilita o deck inferior
-        return (renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1'),
-                disableDeck('top-deck'),
-                enableDeck('bottom-deck'))
+        // Renderiza a carta na área de duelo
+        renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1')
+        // Desabilita o deck SUPERIOR
+        disableDeck('top-deck')
+        // Habilita o deck INFERIOR
+        enableDeck('bottom-deck')
     } else if (amountCards < 3 && alt=='face-up') { // Verifica se existe menos de 2 cartas viradas para cima na área de duelo
-        // Renderiza a segunda carta na área de duelo e desabilita os dois decks
-        return (renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card2'),
-                disableDeck('top-deck'),
-                disableDeck('bottom-deck'))
+        // Renderiza a segunda carta na área de duelo
+        renderDuelCards(duelAreaCard2, width, height, cardSrc, atk, def, deck, 'card2')
+        // Desabilita o deck SUPERIOR
+        disableDeck('top-deck')
+        // Desabilita o deck INFERIOR
+        disableDeck('bottom-deck')
     }
 }
+
+// =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
 // Renderiza uma carta numa área de duelo
 const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, cardNum) => {

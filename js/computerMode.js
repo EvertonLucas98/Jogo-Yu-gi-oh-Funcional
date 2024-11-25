@@ -49,7 +49,7 @@ const bottomDeckCards = [
     {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom', position: 10}
 ]
 
-// Função que obtém os atributos das cartas do deck superior que são clicadas (1º)
+// Função que obtém os atributos das cartas do deck superior que são clicadas
 const infoValues = (event) => {
     // Armazena as informações da carta
     const img = event.target
@@ -73,7 +73,7 @@ const infoValues = (event) => {
     addToDuelArea(img.src, alt, atk, def, deck)
 }
 
-// Função que adiciona a carta à área de duelo (2º)
+// Função que adiciona a carta à área de duelo
 const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     // Armazena as informações da ÁREA DE DUELO
     const duelArea = document.querySelector('.duel')
@@ -90,7 +90,7 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
 
     // Se não tiver NENHUMA carta na área de duelo e se a carta clicada está virada para cima
     if (amountCards == 1 && alt=='face-up') {
-        // Renderiza a carta na área de duelo,
+        // Renderiza a carta na área de duelo
         renderDuelCards(duelAreaCard1, width, height, cardSrc, atk, def, deck, 'card1')
         // Desabilita o deck superior
         disableDeck('top-deck')
