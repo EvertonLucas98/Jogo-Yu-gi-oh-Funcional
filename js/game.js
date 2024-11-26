@@ -49,11 +49,6 @@ const bottomDeckCards = [
     {url: "imgs/CyberDragon.jpg", atk: 2100, def: 1600, deck: 'bottom'}
 ]
 
-// Renderiza as cartas do DECK SUPERIOR
-renderCards(topDeckCards, "top-deck")
-// Renderiza as cartas do DECK INFERIOR
-renderCards(bottomDeckCards, "bottom-deck")
-
 // Função que obtém os atributos das cartas do deck superior que são clicadas
 const infoValues = (event) => {
     // Armazena as informações da carta
@@ -111,16 +106,21 @@ const addToDuelArea = (cardSrc, alt, atk, def, deck) => {
     }
 }
 
-// =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-
 // Renderiza uma carta numa área de duelo
 const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, cardNum) => {
+    // Armazena a criação de uma imagem
     const cardElement = document.createElement('img')
+    // Adiciona o atributo SRC
     cardElement.src = cardSrc
+    // Adiciona o atributo ID
     cardElement.id = cardNum
+    // Adiciona o atributo ALT
     cardElement.alt = "card1-in-duel"
+    // Adiciona o atributo DATA-ATK
     cardElement.setAttribute("data-atk", atk)
+    // Adiciona o atributo DATA-DEF
     cardElement.setAttribute("data-def", def)
+    // Adiciona o atributo DATA-DECK
     cardElement.setAttribute("data-deck", deck)
 
     // Verifica se a tela é menor que 451px
@@ -149,47 +149,70 @@ const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, c
         cardElement.style.height = '20em'
     }
 
-    return duelAreaCard.appendChild(cardElement)
+    // Adiciona a área de duelo a carta criada
+    duelAreaCard.appendChild(cardElement)
 }
 
 // Função para criar uma imagem para área de pré-visualização
 const createPreviewCard = (card) => {
+    // Armazena o atributo DATA-DECK da carta
     const cardPreviewSide = card.getAttribute('data-deck')
+    // Armazena o atributo SRC da carta
     const cardPreviewSrc = card.getAttribute('src')
+    // Armazena a área de pré-visualização SUPERIOR
     const topArea = document.getElementById('card1-preview')
+    // Armazena a área de pré-visualização INFERIOR
     const bottomArea = document.getElementById('card2-preview')
+    // Limpa a área de pré-visualização 
     clearPreviewArea()
+    // Armazena a criação de uma imagem
     const cardCopia = document.createElement('img')
+    // Adiciona o atributo SRC
     cardCopia.src = cardPreviewSrc
+    // Adiciona o atributo ALT
     cardCopia.alt = "card-preview"
+    // Adiciona uma LARGURA de 70% do container
     cardCopia.style.width = '70%'
+    // Adiciona uma ALTURA de 100% do container
     cardCopia.style.height = '100%'
+    
+    // Caso o DATA-DECK da carta seja referente as cartas do deck SUPERIOR
     if (cardPreviewSide == 'top') {
         topArea.appendChild(cardCopia)
-    } else {
+    } else { // Caso seja referente as cartas do deck INFERIOR
         bottomArea.appendChild(cardCopia)
     }
 }
 
 // Função para limpar a área de pré-visualização
 const clearPreviewArea = () => {
+    // Armazena a área de pré-visualização SUPERIOR
     const topArea = document.getElementById('card1-preview')
+    // Armazena a área de pré-visualização INFERIOR
     const bottomArea = document.getElementById('card2-preview')
+
+    // Se a área SUPERIOR tiver uma imagem essa imagem é removida
     if (topArea.querySelector('img')) topArea.querySelector('img').remove()
+    // Se a área INFERIOR tiver uma imagem essa imagem é removida
     if (bottomArea.querySelector('img')) bottomArea.querySelector('img').remove()
 }
 
-// Função para habilitar o deck
+// Função para habilitar um determinado deck
 const enableDeck = (containerId) => {
+    // Armazena o container do deck
     const container = document.getElementById(containerId)
+    // Altera o estilo para tornar "clicável"
     container.style.pointerEvents = 'auto'
+    // Adiciona o evento de click ao container
     document.getElementById(containerId).addEventListener('click', infoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
 
 // Função para desabilitar o deck
 const disableDeck = (containerId) => {
+    // Armazena o container do deck
     const container = document.getElementById(containerId)
+    // Altera o estilo para tornar "inclicável"
     container.style.pointerEvents = 'none'
 }
 
@@ -198,60 +221,80 @@ const toggleFlip = (card) => card.style.transform = card.style.transform === 'ro
 
 // Implementa o click para uma carta específica
 const handleFlipClick = (event) => {
+    // Armazena a div da carta
     const card = event.target.closest('.flip-card')
+
+    // Se a div conter uma carta
     if (card) toggleFlip(card) // Realiza o flip da carta
 }
 
-// Função para o evento de click no botão de atacar do player 1 (3º)
+// Função para o evento de click no botão de atacar do player 1
 const duelButtonEvent = () => {
+    // Armazena as informações da PRIMEIRA carta
     const card1 = document.getElementById('card1')
+    // Armazena as informações da SEGUNDA carta
     const card2 = document.getElementById('card2')
+    // Armazena o ATAQUE da PRIMEIRA carta
     const atkCard1 = card1.getAttribute('data-atk')
+    // Armazena a DEFESA da SEGUNDA carta
     const defCard2 = card2.getAttribute('data-def')
-    const deckCard1 = card1.getAttribute('data-deck')
-    return (duelDamage(atkCard1, defCard2, 'top'),
-            clearDuelArea(),
-            disableDuelButtonEvent('player1-duel-button'),
-            enableDuelButtonEvent('player2-duel-button'),
-            renderCards(topDeckCards, "top-deck"),
-            renderCards(bottomDeckCards, "bottom-deck"),
-            otherRound('bottom-deck'))
+
+    // Calcula o dano
+    duelDamage(atkCard1, defCard2, 'top')
+    // Limpa a área de duelo
+    clearDuelArea()
+    // Desabilita o BOTÃO DE ATAQUE DO PLAYER 1 
+    disableDuelButtonEvent('player1-duel-button')
+    // Habilita o BOTÃO DE ATAQUE DO PLAYER 2 
+    enableDuelButtonEvent('player2-duel-button')
+    // Vira as cartas do deck SUPERIOR para baixo
+    renderCards(topDeckCards, "top-deck")
+    // Vira as cartas do deck INFERIOR para baixo
+    renderCards(bottomDeckCards, "bottom-deck")
+    // Começa um novo round
+    otherRound('bottom-deck')
 }
 
-// Função que calcula o dano (4º)
+// Função que calcula o DANO DO PLAYER
 const duelDamage = (atk, def, deckCard1) => {
+    // Se a carta pertencer ao deck SUPERIOR
     if (deckCard1 == 'top') {
+        // Se a diferença do ataque pela defesa for maior que 0
         if ((atk-def) > 0) {
-            console.log(player2LifeAmount.textContent)
-            console.log(atk-def)
-            console.log((Number(player2LifeAmount.textContent)-(atk-def)))
-            return applyDamageToPlayer( (Number(player2LifeAmount.textContent)-(atk-def)),
-                                        (atk-def),
-                                        player2LifeAmount,
-                                        player2LifeBar,
-                                        'PLAYER 1',
-                                        'top-deck')
+            // Chama a função que aplica o dano ao player
+            applyDamageToPlayer((Number(player2LifeAmount.textContent)-(atk-def)),
+                                (atk-def),
+                                player2LifeAmount,
+                                player2LifeBar,
+                                'PLAYER 1',
+                                'top-deck')
         }
-    } else {
+    } else { // A carta pertencer ao deck INFERIOR
+        // Se a diferença do ataque pela defesa for maior que 0
         if ((atk-def) > 0) {
-            return applyDamageToPlayer( (Number(player1LifeAmount.textContent)-(atk-def)),
-                                        (atk-def),
-                                        player1LifeAmount,
-                                        player1LifeBar,
-                                        'PLAYER 2',
-                                        'bottom-deck')
+            // Chama a função que aplica o dano ao player
+            applyDamageToPlayer((Number(player1LifeAmount.textContent)-(atk-def)),
+                                (atk-def),
+                                player1LifeAmount,
+                                player1LifeBar,
+                                'PLAYER 2',
+                                'bottom-deck')
         }
     }
 }
 
-// Função que aplica o dano a barra de vida (5º)
+// Função que aplica o dano a barra de vida do player
 const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner, deckBlocked) => {
-    lifeBarPlayer.style.width = ((damage*100)/Number(div.textContent))+"%"
+    // Altera o estilo da barra de vida de acordo com a porcentagem que é equivalente ao dano
+    lifeBarPlayer.style.width = ((damage*100)/5000)+"%"
+    // Altera o valor contido na div que representa numericamente a quantidade de vida
     div.textContent -= restOfLife
+
+    // Se o valor contido na div for menor ou igual a 0
     if (div.textContent <= 0) {
         // Limpa a área de pré-visualização
         clearPreviewArea()
-        // Chama a condição de vitória
+        // Chama a função que cria a tela de vitória
         winScreen(nameWinner, deckBlocked)
     }
 }
@@ -262,18 +305,27 @@ const winScreen = (nameWinner, deckBlocked) => {
     resultScreen.style.display = 'block'
     // Escreve o player vencedor na tela
     document.getElementById('winner').innerText = nameWinner
-    // Diminui o brilho dos elementos atrás da tela de vitória
+    // Altera o estilo do lado DIREITO para DIMINUIR o brilho
     document.getElementById('right').style.filter = 'brightness(20%)'
+    // Altera o estilo do lado ESQUERDO para DIMINUIR o brilho
     document.getElementById('left').style.filter = 'brightness(20%)'
     // Evento de click no botão de continuar, para reiniciar o game
     restartButton.addEventListener('click', () => {
+        // Altera o estilo do lado DIREITO para AUMENTAR o brilho
         document.getElementById('right').style.filter = 'brightness(100%)'
+        // Altera o estilo do lado ESQUERDO para AUMENTAR o brilho
         document.getElementById('left').style.filter = 'brightness(100%)'
-        resultScreen.style.display = 'none'
-        player1LifeAmount.textContent = 100
+        // Reseta o VALOR NUMÉRICO DA VIDA do PLAYER 1 
+        player1LifeAmount.textContent = 5000
+        // Reseta a BARRA DE VIDA do PLAYER 1
         player1LifeBar.style.width = 100+"%"
-        player2LifeAmount.textContent = 100
+        // Reseta o VALOR NUMÉRICO DA VIDA do PLAYER 2
+        player2LifeAmount.textContent = 5000
+        // Reseta a BARRA DE VIDA do PLAYER 2
         player2LifeBar.style.width = 100+"%"
+        // Altera o estilo do display da tela para sumir
+        resultScreen.style.display = 'none'
+        // Chama a função para jogar novamente
         playAgain(deckBlocked)
     })
 }
@@ -282,13 +334,14 @@ const winScreen = (nameWinner, deckBlocked) => {
 const playAgain = (deckBlocked) => {
     // Verifica se o deck a ser bloqueado é o superior
     if (deckBlocked == 'top-deck') {
-        // Habilita o deck inferior
+        // Habilita o deck INFERIOR
         enableDeck('bottom-deck')
-        disableDeck(deckBlocked)
+        // Desabilita o deck SUPERIOR
+        disableDeck('top-deck')
         // Adicionando o evento de click ao container que contém o deck inferior
         document.getElementById('bottom-deck').addEventListener('click', infoValues)
         document.getElementById('bottom-deck').addEventListener('click', handleFlipClick)
-    } else { // Caso seja o deck inferior a ser bloqueado
+    } else { // Caso seja o deck INFERIOR a ser bloqueado
         // Habilita o deck superior 
         enableDeck('top-deck')
         // Desabilita o deck inferior
@@ -299,30 +352,37 @@ const playAgain = (deckBlocked) => {
     }
 }
 
-// Função que limpa a area de duelo (6º)
+// Função que limpa a area de duelo
 const clearDuelArea = () => {
+    // Remove as imagens da área de duelo
     document.getElementById('card1').remove()
     document.getElementById('card2').remove()
 }
 
-// Função para fazer o deck inferior começar jogando (7º)
+// Função para fazer o deck inferior começar jogando
 const otherRound = (containerId) => {
+    // Habilita o deck desejado
     enableDeck(containerId)
+    // Adiciona o evento de click no container desejado
     document.getElementById(containerId).addEventListener('click', otherInfoValues)
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
 
-// Função para pegar o atributo alt da imagem (8º)
+// Função para pegar o atributo alt da imagem
 const otherInfoValues = (event) => {
+    // Armazena a imagem
     const img = event.target
+    // Armazena o atributo ALT da imagem
     const alt = img.getAttribute('alt')
     // Adiciona a carta à área de duelo
     otherAddToDuelArea(alt)
 }
 
-// Função que adiciona a carta à área de duelo (9º)
+// Função que adiciona a carta à área de duelo
 const otherAddToDuelArea = (alt) => {
+    // Armazena o container da área de duelo
     const duelArea = document.querySelector('.duel')
+    // Armazena a quantidade de imagens contido na área de duelo
     const amountCards = duelArea.querySelectorAll('img')
 
     // Verifica quantas cartas já estão na área de duelo
@@ -339,62 +399,93 @@ const otherAddToDuelArea = (alt) => {
     }
 }
 
-// Função para o evento de click no botão de atacar do player 2 (10º)
+// Função para o evento de click no botão de atacar do player 2
 const otherDuelButtonEvent = () => {
+    // Armazena as informações da carta do PLAYER 1 na área de duelo
     const card1 = document.getElementById('card1')
+    // Armazena as informações da carta do PLAYER 2 na área de duelo
     const card2 = document.getElementById('card2')
+    // Armazena o ATAQUE da carta do PLAYER 1
     const atkCard1 = card1.getAttribute('data-atk')
+    // Armazena o DEFESA da carta do PLAYER 2
     const defCard2 = card2.getAttribute('data-def')
-    return (duelDamage(atkCard1, defCard2, 'bottom'),
-            clearDuelArea(),
-            enableDuelButtonEvent('player1-duel-button'),
-            disableDuelButtonEvent('player2-duel-button'),
-            renderCards(topDeckCards, "top-deck"),
-            renderCards(bottomDeckCards, "bottom-deck"),
-            anotherRound('top-deck'))
+
+    // Calcula o dano
+    duelDamage(atkCard1, defCard2, 'bottom')
+    // Limpa a área de duelo
+    clearDuelArea()
+    // Habilita o BOTÃO DE ATAQUE DO PLAYER 1
+    enableDuelButtonEvent('player1-duel-button')
+    // Desabilita o BOTÃO DE ATAQUE DO PLAYER 2
+    disableDuelButtonEvent('player2-duel-button')
+    // Vira as cartas do deck SUPERIOR para baixo
+    renderCards(topDeckCards, "top-deck")
+    // Vira as cartas do deck INFERIOR para baixo
+    renderCards(bottomDeckCards, "bottom-deck")
+    // Começa um novo round
+    anotherRound('top-deck')
 }
 
-// Função para fazer o deck superior começar jogando (11º)
+// Função para fazer o deck superior começar jogando
 const anotherRound = (containerId) => {
+    // Habilita o deck desejado
     enableDeck(containerId)
+    // Adicionando o evento de click ao container que contém o deck desejado
     document.getElementById(containerId).addEventListener('click', infoValues)
+    // Adiciona um evento de click que da o efeito de girar as cartas
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
 
 // Função para habilitar os botões
 const enableDuelButtonEvent = (containerId) => {
+    // Armazena o container do botão desejado
     const container = document.getElementById(containerId)
+    // Torna o botão "clicável"
     container.style.pointerEvents = 'auto'
+    // Adiciona um evento de click ao botão de ataque do player 2 
     document.getElementById('player2-duel-button').addEventListener('click', otherDuelButtonEvent)
 }
 
 // Função que desabilita o botão de ataque do player 1
 const disableDuelButtonEvent = (containerId) => {
+    // Armazena o container do botão desejado
     const container = document.getElementById(containerId)
+    // Torna o botão "inclicável"
     container.style.pointerEvents = 'none'
 }
 
 // Função que da play na musica do duelo
 const backgroundMusic = () => {
+    // Armazena as informações do botão
     const music = document.getElementById('duel-music-loop')
+    // Ativa o play na musica
     music.play()
 }
 
 // Função que muta a musica
 const stopMusic = () => {
+    // Armazena as informações do botão
     const music = document.getElementById('duel-music-loop')
+    // Pausa a musica
     music.pause()
 }
 
-// Toca a musica de fundo
+// Renderiza as cartas do DECK SUPERIOR
+renderCards(topDeckCards, "top-deck")
+// Renderiza as cartas do DECK INFERIOR
+renderCards(bottomDeckCards, "bottom-deck")
+
+// Função que da play na musica de fundo
 backgroundMusic()
 
-// Adicionando o evento de click para mutar ou desmutar a musica
+// Adiciona o evento de click para mutar a musica
 document.getElementById('music-stop').addEventListener('click', stopMusic)
+// Adiciona o evento de click para desmutar a musica
 document.getElementById('music-play').addEventListener('click', backgroundMusic)
 
 // Adicionando o evento de click ao container que contém o deck superior
 document.getElementById('top-deck').addEventListener('click', infoValues)
+// Adiciona um evento de click que da o efeito de girar as cartas
 document.getElementById('top-deck').addEventListener('click', handleFlipClick)
 
 // Evento de click no botão de duelo

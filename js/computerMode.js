@@ -170,8 +170,6 @@ const renderDuelCards = (duelAreaCard, width, height, cardSrc, atk, def, deck, c
 const createPreviewCard = (card) => {
     // Armazena a LARGURA da tela
     const width = window.innerWidth;
-    // Armazena o COMPRIMENTO da tela
-    const height = window.innerHeight;
     // Armazena o atributo DATA-DECK da carta
     const cardPreviewSide = card.getAttribute('data-deck')
     // Armazena o atributo SRC da carta
@@ -188,6 +186,8 @@ const createPreviewCard = (card) => {
     cardCopia.src = cardPreviewSrc
     // Adiciona o atributo ALT
     cardCopia.alt = "card-preview"
+
+    // Caso a largura da tela seja menor que 1081 pixels
     if (width < 1081) {
         // Adiciona um estilo para a LARGURA
         cardCopia.style.width = '98%'
@@ -216,6 +216,7 @@ const clearPreviewArea = () => {
     const topArea = document.getElementById('card1-preview')
     // Armazena a área de pré-visualização INFERIOR
     const bottomArea = document.getElementById('card2-preview')
+    
     // Se a área SUPERIOR tiver uma imagem essa imagem é removida
     if (topArea.querySelector('img')) topArea.querySelector('img').remove()
     // Se a área INFERIOR tiver uma imagem essa imagem é removida
@@ -233,7 +234,7 @@ const enableDeck = (containerId) => {
     document.getElementById(containerId).addEventListener('click', handleFlipClick)
 }
 
-// Função para desabilitar o deck
+// Função para desabilitar um determinado deck
 const disableDeck = (containerId) => {
     // Armazena o container do deck
     const container = document.getElementById(containerId)
@@ -266,7 +267,7 @@ const infoDuelValues = (duelCardArea1, duelCardArea2) => {
     duelDamageComputer(atk, def)
 }
 
-// Função para o evento de click no botão de atacar do player 1 (3º)
+// Função para o evento de click no botão de atacar do player 1
 const duelButtonEvent = () => {
     // Armazena as informações da PRIMEIRA carta
     const card1 = document.getElementById('card1')
@@ -291,6 +292,7 @@ const duelButtonEvent = () => {
 const duelDamage = (atk, def) => {
     // Se a diferença do ataque pela defesa for maior que 0
     if ((atk-def) > 0) {
+        // Chama a função que aplica o dano ao player
         applyDamageToPlayer((Number(player2LifeAmount.textContent)-(atk-def)),
                             (atk-def),
                             player2LifeAmount,
@@ -303,6 +305,7 @@ const duelDamage = (atk, def) => {
 const duelDamageComputer = (atk, def) => {
     // Se a diferença do ataque pela defesa for maior que 0
     if ((atk-def) > 0) {
+        // Chama a função que aplica o dano ao player
         applyDamageToPlayer((Number(player1LifeAmount.textContent)-(atk-def)),
                             (atk-def),
                             player1LifeAmount,
@@ -311,7 +314,7 @@ const duelDamageComputer = (atk, def) => {
     }
 }
 
-// Função que aplica o dano a barra de vida
+// Função que aplica o dano a barra de vida do player
 const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner) => {
     // Altera o estilo da barra de vida de acordo com a porcentagem que é equivalente ao dano
     lifeBarPlayer.style.width = ((damage*100)/5000)+"%"
@@ -322,7 +325,7 @@ const applyDamageToPlayer = (damage, restOfLife, div, lifeBarPlayer, nameWinner)
     if (div.textContent <= 0) {
         // Limpa a área de pré-visualização
         clearPreviewArea()
-        // Chama a condição de vitória
+        // Chama a função que cria a tela de vitória
         winScreen(nameWinner)
     }
 }
@@ -369,14 +372,14 @@ const playAgain = () => {
     document.getElementById('top-deck').addEventListener('click', handleFlipClick)
 }
 
-// Função que limpa a area de duelo (6º)
+// Função que limpa a area de duelo
 const clearDuelArea = () => {
     // Remove as imagens da área de duelo
     document.getElementById('card1').remove()
     document.getElementById('card2').remove()
 }
 
-// Função para fazer o deck inferior começar jogando (7º)
+// Função para fazer o deck inferior começar jogando 
 const otherRound = (containerId) => {
     // Armazena a área da primeira carta
     const duelAreaCard1 = document.querySelector('.duel-card-1')
@@ -387,7 +390,7 @@ const otherRound = (containerId) => {
 
     // Chama a função que escolhe a carta do computador
     computerDuelCard(duelAreaCard1, width, height, 'card2', randomNumber(0, 4))
-    // Ativa o deck desejado
+    // Habilita o deck desejado
     enableDeck(containerId)
     // Adiciona o evento de click no container desejado
     document.getElementById(containerId).addEventListener('click', infoValues)
@@ -433,7 +436,7 @@ document.getElementById('music-play').addEventListener('click', backgroundMusic)
 
 // Adiciona um evento de click no container do deck superior
 document.getElementById('top-deck').addEventListener('click', infoValues)
-// Adiciona outro evento de click nas cartas
+// Adiciona um evento de click que da o efeito de girar as cartas
 document.getElementById('top-deck').addEventListener('click', handleFlipClick)
 
 // Evento de click no botão de duelo
